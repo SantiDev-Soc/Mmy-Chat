@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Message\Application\CreateMessage;
+namespace App\Message\Application\Command\CreateMessage;
 
 use App\Message\Domain\Message;
 use App\Message\Domain\Repository\MessageRepositoryInterface;

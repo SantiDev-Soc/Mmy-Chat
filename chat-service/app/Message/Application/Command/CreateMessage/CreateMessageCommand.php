@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Message\Application\CreateMessage;
+namespace App\Message\Application\Command\CreateMessage;
 
 use App\Shared\Application\Command\CommandInterface;
 use App\Shared\Domain\ValueObject\UserId;

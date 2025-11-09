@@ -53,6 +53,7 @@ export default function contactSearch() {
         select(contact) {
             this.query = contact.name;
             this.open = false;
+            this.$root.__x.$data.selectContact(contact);
             console.log('Contact selected:', contact);
             window.location.href = `/chat/${contact.id}`;
         }

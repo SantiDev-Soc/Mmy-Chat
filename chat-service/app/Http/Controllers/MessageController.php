@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Message\Application\Conversations\GetConversationsCommand;
-use App\Message\Application\Conversations\GetConversationsHandler;
-use App\Message\Application\CreateMessage\CreateMessageCommand;
-use App\Message\Application\CreateMessage\CreateMessageHandler;
+use App\Message\Application\Command\Conversations\GetConversationsCommand;
+use App\Message\Application\Command\Conversations\GetConversationsHandler;
+use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
+use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
 use App\Shared\Domain\ValueObject\UserId;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -55,7 +55,7 @@ class MessageController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => $conversations->serialize()
+                'message' => $conversations
             ], 201);
 
         } catch (Throwable $exception){
@@ -65,4 +65,6 @@ class MessageController extends Controller
             ], 500);
         }
     }
+
+
 }

@@ -19,6 +19,13 @@ final readonly class MessageRepository implements MessageRepositoryInterface
     {
     }
 
+    protected function getMapper(): MessageMapper
+    {
+        return new MessageMapper();
+
+    }
+
+
     /** @throws Exception */
     public function insert(Message $message): void
     {
@@ -39,7 +46,7 @@ final readonly class MessageRepository implements MessageRepositoryInterface
             ->select('*')
             ->from(Message::TABLE_NAME, alias: 'm')
             ->where('m.sender_id = :userId')
-            ->setParameter('userId', $userId);
+            ->setParameter('userId', $userId->getValue());
 
         $results = $queryBuilder->executeQuery()->fetchAllAssociative();
 
@@ -51,12 +58,6 @@ final readonly class MessageRepository implements MessageRepositoryInterface
         return $messages;
     }
 
-    protected function getMapper(): MessageMapper
-    {
-        return new MessageMapper();
-
-    }
-
     /** @throws Exception */
     public function findById(MessageId $messageId): ?Message
     {
@@ -65,10 +66,29 @@ final readonly class MessageRepository implements MessageRepositoryInterface
             ->select('*')
             ->from(Message::TABLE_NAME, alias: 'm')
             ->where('m.id = :messageId')
-            ->setParameter('messageId', $messageId);
+            ->setParameter('messageId', $messageId->getValue());
 
         $result = $queryBuilder->executeQuery()->fetchAssociative();
 
         return $this->getMapper()->hydrate($result);
+    }
+
+    /** @throws Exception */
+    public function findContactsByUserId(UserId $userId): array
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $queryBuilder
+            ->select('DISTINCT CASE
+                    WHEN m.sender_id = :userId THEN m.receiver_id
+                    ELSE m.sender_id
+                  END AS contact_id')
+            ->from(Message::TABLE_NAME, 'm')
+            ->where('m.sender_id = :userId OR m.receiver_id = :userId')
+            ->setParameter('userId', $userId->getValue());
+
+        $results = $queryBuilder->executeQuery()->fetchFirstColumn();
+
+        return array_map(static fn($id) => UserId::create((string)$id), $results);
     }
 }
