@@ -9,7 +9,7 @@ use DateTimeImmutable;
 
 class MessageRead
 {
-    public const TABLE_NAME = 'message_read';
+    public const TABLE_NAME = 'message_reads';
     private MessageId $messageId;
     private UserId $userId;
     private DateTimeImmutable $readAt;
@@ -25,12 +25,16 @@ class MessageRead
         $this->readAt = $readAt ?? new DateTimeImmutable();
     }
 
+    public function markAsRead(): void {
+        $this->readAt = new DateTimeImmutable();
+    }
+
     public static function deserialize(array $row): self
     {
         $messageId = $row['message_id'];
         $userId = $row['user_id'];
-        $readAt = isset($data['read_at'])
-            ? DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['read_at']) :
+        $readAt = isset($row['read_at'])
+            ? DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $row['read_at']) :
             new DateTimeImmutable();
         return new self($messageId, $userId, $readAt);
     }
@@ -38,10 +42,26 @@ class MessageRead
     public function serialize(): array
     {
         return [
-            'messageId' => $this->messageId,
-            'userId' => $this->userId,
+            'messageId' => $this->messageId->getValue(),
+            'userId' => $this->userId->getValue(),
             'readAt' => $this->readAt->format('Y-m-d H:i:s'),
         ];
     }
+
+    public function getReadAt(): DateTimeImmutable
+    {
+        return $this->readAt;
+    }
+
+    public function getUserId(): UserId
+    {
+        return $this->userId;
+    }
+
+    public function getMessageId(): MessageId
+    {
+        return $this->messageId;
+    }
+
 
 }
