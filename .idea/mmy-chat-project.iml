@@ -14,6 +14,10 @@
       <sourceFolder url="file://$MODULE_DIR$/mmy-chat-backup/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/mmy-chat-backup/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/mmy-chat-backup/tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/tests" isTestSource="true" packagePrefix="Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/chat-service/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/chat-service/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/chat-service/vendor/clue/redis-protocol" />
