@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="developing functionalities of chat-service &amp;&amp; my-chat">
+    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="developing functionalities with the front in my-chat">
       <change beforePath="$PROJECT_DIR$/.idea/mmy-chat-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mmy-chat-project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1259" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16414" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16414" afterDir="false" />
@@ -17,14 +18,15 @@
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840_vm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2841" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2841" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_control" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/pg_subtrans/0000" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/pg_subtrans/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/pg_xact/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/postmaster.pid" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/postmaster.pid" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1259" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/16390" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/16390" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24738" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24738" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24754" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24754" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24754_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24754_fsm" afterDir="false" />
@@ -33,136 +35,19 @@
       <change beforePath="$PROJECT_DIR$/data/base/16384/24764_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24764_fsm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24766" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24766" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24767" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24767" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/24767_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24767_fsm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/2619_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619_fsm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/2696" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2696" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2840" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2840_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_vm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2841" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2841" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_control" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pg_subtrans/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_subtrans/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_xact/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/postmaster.pid" beforeDir="false" afterPath="$PROJECT_DIR$/data/postmaster.pid" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/Dockerfile.reverb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Domain/User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Http/Controllers/Auth/VerifyEmailController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Http/Controllers/ContactController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Http/Controllers/Controller.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Livewire/Actions/Logout.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Livewire/Forms/LoginForm.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Providers/AppServiceProvider.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/Providers/VoltServiceProvider.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/View/Components/AppLayout.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/app/View/Components/GuestLayout.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/artisan" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/bootstrap/app.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/bootstrap/cache/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/bootstrap/providers.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/bootstrap/reverb.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/app.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/auth.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/broadcasting.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/cache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/database.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/filesystems.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/logging.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/mail.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/queue.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/reverb.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/services.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/config/session.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/database/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/database/factories/UserFactory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/database/migrations/0001_01_01_000000_create_users_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/database/migrations/0001_01_01_000001_create_cache_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/database/migrations/0001_01_01_000002_create_jobs_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/database/seeders/DatabaseSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/entrypoint.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/phpunit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/postcss.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/public/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/public/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/css/app.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/js/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/js/contactSearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/js/echo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/action-message.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/application-logo.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/auth-session-status.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/danger-button.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/dropdown-link.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/dropdown.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/input-error.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/input-label.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/modal.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/nav-link.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/primary-button.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/responsive-nav-link.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/secondary-button.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/components/text-input.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/dashboard.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/layouts/app.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/layouts/guest.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/layout/navigation.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/pages/auth/confirm-password.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/pages/auth/forgot-password.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/pages/auth/login.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/pages/auth/register.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/pages/auth/reset-password.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/pages/auth/verify-email.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/profile/delete-user-form.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/profile/update-password-form.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/profile/update-profile-information-form.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/livewire/welcome/navigation.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/profile.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/resources/views/welcome.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/routes/auth.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/routes/channels.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/routes/console.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/routes/web.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/app/private/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/app/public/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/framework/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/framework/cache/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/framework/cache/data/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/framework/sessions/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/framework/testing/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/framework/views/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/storage/logs/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tailwind.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/Auth/AuthenticationTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/Auth/EmailVerificationTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/Auth/PasswordConfirmationTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/Auth/PasswordResetTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/Auth/PasswordUpdateTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/Auth/RegistrationTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/ExampleTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Feature/ProfileTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/TestCase.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/tests/Unit/ExampleTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat-backup/vite.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/chatApp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/contactSearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" beforeDir="false" afterPath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redis-data/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/redis-data/dump.rdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +73,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="MMY-Chat/001" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -207,6 +92,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="MMY-Chat/002-developing-front-functionalities" />
+                    <option name="lastUsedInstant" value="1763196524" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="MMY-Chat/001" />
                     <option name="lastUsedInstant" value="1761471779" />
@@ -228,6 +117,16 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/SantiDev-Soc/Mmy-Chat.git&quot;,
     &quot;accountId&quot;: &quot;068d3478-d29d-4aeb-84ee-f18056cfdb0e&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;SantiDev-Soc&quot;,
+    &quot;repository&quot;: &quot;Mmy-Chat&quot;
   }
 }</component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -552,7 +451,7 @@
     &quot;PHPUnit.chat-service.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;MMY-Chat/001&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MMY-Chat/002-developing-front-functionalities&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/PROJECTS/Mmy-Daw-Project/mmy-chat-project&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -563,6 +462,7 @@
     &quot;npm.dev.executor&quot;: &quot;Run&quot;,
     &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php.debug&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2024.3.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -663,6 +563,9 @@
       <workItem from="1762976304397" duration="162000" />
       <workItem from="1763047172796" duration="556000" />
       <workItem from="1763055114672" duration="1326000" />
+      <workItem from="1763196022734" duration="2063000" />
+      <workItem from="1763200820997" duration="1070000" />
+      <workItem from="1763202300605" duration="10726000" />
     </task>
     <task id="LOCAL-00001" summary="Preparing the branches">
       <option name="closed" value="true" />
@@ -696,7 +599,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762701372982</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="developing functionalities with the front in my-chat">
+      <option name="closed" value="true" />
+      <created>1763196087858</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763196087858</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -716,7 +627,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Preparing the branches" />
     <MESSAGE value="developing functionalities of chat-service &amp;&amp; my-chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="developing functionalities of chat-service &amp;&amp; my-chat" />
+    <MESSAGE value="developing functionalities with the front in my-chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="developing functionalities with the front in my-chat" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
