@@ -9,3 +9,5 @@ tests
 *.sqlite
 *.lock
 public/build
+.data\global
+.data\base\16384
