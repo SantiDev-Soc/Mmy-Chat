@@ -3,17 +3,23 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Message\Application\CreateMessage\CreateMessageCommand;
-use App\Message\Application\CreateMessage\CreateMessageHandler;
+use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
+use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
+use App\Message\Application\Query\GetConversations\GetConversationsQuery;
+use App\Message\Application\Query\GetConversations\GetConversationsHandler;
+use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactHandler;
+use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactQuery;
 use App\Shared\Domain\ValueObject\UserId;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Throwable;
 
-class MessageController extends Controller
+final class MessageController extends Controller
 {
     public function __construct(
-        private readonly CreateMessageHandler $handler
+        private readonly CreateMessageHandler $handler,
+        private readonly GetConversationsHandler $getConversationsHandler,
+        private readonly GetMessagesWithContactHandler $getMessagesWithContactHandler,
     )
     {
     }
@@ -42,4 +48,50 @@ class MessageController extends Controller
             ], 500);
         }
     }
+
+    public function getConversations(string $userId): JsonResponse
+    {
+        try {
+            $command = new GetConversationsQuery(UserId::create($userId));
+
+            $conversations = ($this->getConversationsHandler)($command);
+
+            return response()->json([
+                'success' => true,
+                'message' => $conversations
+            ], 201);
+
+        } catch (Throwable $exception){
+            return response()->json([
+                'success' => false,
+                'error' => $exception->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getMessagesWithContact(Request $request): JsonResponse
+    {
+        $data = $request->request->all();
+
+        try {
+            $command = new GetMessagesWithContactQuery(
+                UserId::create($data['user_id']),
+                UserId::create($data['contact_id']),
+            );
+
+            $messagesWithContact = ($this->getMessagesWithContactHandler)($command);
+
+            return response()->json([
+                'success' => true,
+                'message' => $messagesWithContact
+            ], 201);
+
+        } catch (Throwable $exception){
+            return response()->json([
+                'success' => false,
+                'error' => $exception->getMessage()
+            ], 500);
+        }
+    }
+
 }

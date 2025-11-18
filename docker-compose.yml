@@ -41,8 +41,18 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - my-chat
-      - users-db
+        users-db:
+          condition: 
+              service_healthy
+        my-chat:
+          condition: 
+              service_healthy
+    environment:
+      DB_HOST: users-db
+      DB_PORT: 5432
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      DB_DATABASE: users
     restart: unless-stopped
     networks:
       - mynetwork
@@ -51,6 +61,11 @@ services:
   users-db:
     image: postgres:latest
     restart: always
+    healthcheck:
+     test: ["CMD-SHELL", "pg_isready -U root"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
     ports:
       - '5432:5432'
     volumes:
@@ -137,7 +152,7 @@ services:
   redis:
     image: redis:alpine
     ports:
-      - '6379:6379'
+      - "7000:7049"
     volumes:
       - ./redis-data:/data
     networks:

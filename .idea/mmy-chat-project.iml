@@ -14,6 +14,12 @@
       <sourceFolder url="file://$MODULE_DIR$/mmy-chat-backup/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/mmy-chat-backup/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/mmy-chat-backup/tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/mmy-chat/tests/Unit" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/chat-service/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/chat-service/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/chat-service/vendor/clue/redis-protocol" />
@@ -291,5 +297,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="alpinejs" level="application" />
+    <orderEntry type="library" name="jquery-3.6.0" level="application" />
   </component>
 </module>

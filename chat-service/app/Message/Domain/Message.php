@@ -15,13 +15,16 @@ class Message
     private UserId $receiverId;
     private string $content;
     private ?DateTimeImmutable $sentAt;
+    private ?DateTimeImmutable $createdAt;
+    private ?DateTimeImmutable $updatedAt;
+
 
     public function __construct(
         MessageId $id,
         UserId $senderId,
         UserId $receiverId,
         string $content,
-        DateTimeImmutable $sentAt = null
+        DateTimeImmutable $sentAt = null,
     )
     {
         $this->id = $id;
@@ -29,6 +32,8 @@ class Message
         $this->receiverId = $receiverId;
         $this->content = $content;
         $this->sentAt = $sentAt ?? new DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): MessageId
@@ -56,6 +61,16 @@ class Message
         return $this->sentAt;
     }
 
+    public function getUpdatedAt(): ?DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function getCreatedAt(): ?DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
     public function serialize(): array
     {
         return [
@@ -64,6 +79,8 @@ class Message
             'receiver_id' => $this->receiverId->getValue(),
             'content' => $this->content,
             'sent_at' => $this->sentAt?->format('Y-m-d H:i:s'),
+            'created_at' => $this->createdAt?->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updatedAt?->format('Y-m-d H:i:s'),
         ];
     }
 
@@ -76,6 +93,11 @@ class Message
         $sentAt = isset($data['sent_at'])
             ? DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['sent_at']) :
             new DateTimeImmutable();
-        return new self($id, $senderId, $receiverId, $content, $sentAt);
+        $createdAt = isset($data['created_at']) ? DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['created_at']) :
+            new DateTimeImmutable();
+        $updatedAt = isset($data['updated_at']) ? DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['updated_at']) :
+            new DateTimeImmutable();
+
+        return new self($id, $senderId, $receiverId, $content, $sentAt, $createdAt, $updatedAt);
     }
 }
