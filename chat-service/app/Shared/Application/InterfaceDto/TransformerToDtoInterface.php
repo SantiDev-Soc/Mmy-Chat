@@ -6,4 +6,5 @@ namespace App\Shared\Application\InterfaceDto;
 interface TransformerToDtoInterface
 {
     public static function transform(array $row): array;
+
 }

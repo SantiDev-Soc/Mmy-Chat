@@ -91,4 +91,22 @@ final readonly class MessageRepository implements MessageRepositoryInterface
 
         return array_map(static fn($id) => UserId::create((string)$id), $results);
     }
+
+    /** @throws Exception */
+    public function findMessagesWithContact(UserId $userId, UserId $contactId): array
+    {
+        $qb = $this->connection->createQueryBuilder();
+
+        $qb->select('m.id, m.sender_id, m.receiver_id, m.content, m.created_at')
+            ->from(Message::TABLE_NAME, 'm')
+            ->where('(m.sender_id = :userId AND m.receiver_id = :contactId)')
+            ->orWhere('(m.sender_id = :contactId AND m.receiver_id = :userId)')
+            ->setParameter('userId', $userId->getValue())
+            ->setParameter('contactId', $contactId->getValue())
+            ->orderBy('m.created_at', 'ASC');
+
+        return $qb->executeQuery()->fetchAllAssociative();
+    }
+
+
 }

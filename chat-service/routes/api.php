@@ -10,3 +10,5 @@ Route::get('/messages/{contactId}', [MessageController::class, 'getMessagesWithC
 
 Route::get('/conversations/{userId}', [MessageController::class, 'getConversations']);
 
+
+

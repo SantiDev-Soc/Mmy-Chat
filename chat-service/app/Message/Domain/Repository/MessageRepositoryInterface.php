@@ -23,4 +23,6 @@ interface MessageRepositoryInterface
 
     public function readBy():void;
 
+    public function findMessagesWithContact(UserId $userId, UserId $contactId): array;
+
 }

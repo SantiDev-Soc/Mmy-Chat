@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Message\Application\Command\Conversations;
+namespace App\Message\Application\Query\GetConversations;
 
 use App\Message\Domain\Repository\MessageRepositoryInterface;
 use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
@@ -16,7 +16,7 @@ final readonly class GetConversationsHandler
     {
     }
 
-    public function __invoke(GetConversationsCommand $command): array
+    public function __invoke(GetConversationsQuery $command): array
     {
         $conversations = $this->messageRepository->findContactsByUserId($command->userId);
         if(isEmpty($conversations)) {
