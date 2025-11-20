@@ -19,7 +19,7 @@ interface MessageRepositoryInterface
 
     public function findById(MessageId $messageId):?Message;
 
-    public function findContactsByUserId(UserId $userId): array;
+    public function getConversationsForUserId(UserId $userId): array;
 
     public function readBy():void;
 

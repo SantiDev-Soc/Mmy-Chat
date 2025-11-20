@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y \
 # 🧰 Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
 # 📁 Define directorio de trabajo
 WORKDIR /var/www
 
@@ -38,7 +41,6 @@ COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # 🔊 Expone puertos HTTP y WebSocket
 EXPOSE 8030
-EXPOSE 8081
 
 # 🏁 Comando de inicio: Laravel + Reverb
 CMD ["/entrypoint.sh"]

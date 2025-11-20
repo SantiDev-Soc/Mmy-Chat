@@ -14,30 +14,37 @@ use Illuminate\Queue\SerializesModels;
 
 class MessageSent implements ShouldBroadcast, ShouldQueue
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets;
+    // NOTA: He quitado SerializesModels porque 'Message' es de Doctrine, no Eloquent.
 
-    public Message $message;
+    // Guardamos datos primitivos para evitar errores de serialización en la cola
+    public string $senderId;
+    public string $receiverId;
+    public array $payload;
 
-    /** Create a new event instance.*/
+    /** Create a new event instance. */
     public function __construct(Message $message)
     {
-        $this->message = $message;
+        // Extraemos los datos AQUÍ, antes de que el evento se vaya a la cola
+        $this->senderId = $message->getSenderId()->getValue();
+        $this->receiverId = $message->getReceiverId()->getValue();
+
+        // Serializamos el mensaje ahora para tener el array listo para enviar
+        $this->payload = $message->serialize();
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, Channel>
-     */
     public function broadcastOn(): array
     {
+        // Usamos los strings guardados
         $participants = [
-            $this->message->getSenderId()->getValue(),
-            $this->message->getReceiverId()->getValue(),
+            $this->senderId,
+            $this->receiverId,
         ];
 
+        //ordenamos los messages de los participantes
         sort($participants);
 
+        // Canal ejemplo: conversation.uuid-1.uuid-2
         $channelName = 'conversation.' . implode('.', $participants);
 
         return [new PrivateChannel($channelName)];
@@ -45,7 +52,8 @@ class MessageSent implements ShouldBroadcast, ShouldQueue
 
     public function broadcastWith(): array
     {
-        return $this->message->serialize();
+        // Devolvemos el array que preparamos en el constructor
+        return $this->payload;
     }
 
     public function broadcastAs(): string

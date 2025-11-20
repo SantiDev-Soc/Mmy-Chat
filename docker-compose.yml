@@ -1,10 +1,10 @@
-# version: '3.8'
+# version: '3.8' (Opcional en versiones nuevas de Docker)
 networks:
   mynetwork:
     driver: bridge
 
 services:
-  # 🧩 Laravel principal (usuarios, frontend)
+  # 🧩 Laravel principal (Front, Usuarios, Auth)
   my-chat:
     build:
       context: ./mmy-chat
@@ -19,40 +19,58 @@ services:
       retries: 5
     command: [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=8020" ]
     environment:
+      # Base de datos
       DB_HOST: users-db
       DB_PORT: 5432
       DB_USERNAME: root
       DB_PASSWORD: root
       DB_DATABASE: users
+
+      # Configuración Reverb / Broadcasting
+      BROADCAST_DRIVER: reverb
+      # Apuntamos al nombre del servicio 'reverb'
+      REVERB_HOST: reverb
+      REVERB_PORT: 8080
+      REVERB_SCHEME: http
+      # Redis para gestión de colas/eventos
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     volumes:
       - './mmy-chat:/var/www'
     depends_on:
       - users-db
+      - redis
     restart: unless-stopped
     networks:
       - mynetwork
 
-  # 🔊 Reverb desde mmy-chat
+  # 🔊 Reverb Centralizado (Único servidor WebSocket)
   reverb:
     build:
-      context: ./mmy-chat
+      context: ./mmy-chat # Usa el código de mmy-chat para arrancar el servidor
       dockerfile: Dockerfile.reverb
-    command: [ "php", "artisan", "reverb:start" ]
+    # IMPORTANTE: --host=0.0.0.0 para que acepte conexiones externas
+    command: [ "php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080" ]
     ports:
       - "8080:8080"
     depends_on:
-        users-db:
-          condition: 
-              service_healthy
-        my-chat:
-          condition: 
-              service_healthy
+      users-db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     environment:
       DB_HOST: users-db
       DB_PORT: 5432
       DB_USERNAME: root
       DB_PASSWORD: root
       DB_DATABASE: users
+
+      # Configuración de Reverb para usar Redis
+      REVERB_SCALING_ENABLED: "true"
+      REVERB_REDIS_HOST: redis
+      REVERB_REDIS_PORT: 6379
+      # Asegúrate de que estas claves coincidan en TODOS los .env
+      # APP_ID, APP_KEY, APP_SECRET deben ser iguales en my-chat y chat-service
     restart: unless-stopped
     networks:
       - mynetwork
@@ -62,10 +80,10 @@ services:
     image: postgres:latest
     restart: always
     healthcheck:
-     test: ["CMD-SHELL", "pg_isready -U root"]
-     interval: 10s
-     timeout: 5s
-     retries: 5
+      test: ["CMD-SHELL", "pg_isready -U root"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - '5432:5432'
     volumes:
@@ -77,37 +95,48 @@ services:
     networks:
       - mynetwork
 
-  # 💬 Microservicio de mensajería con Reverb embebido
+  # 💬 Microservicio de Mensajería (DDD + Doctrine)
   chat-service:
     build:
       context: ./chat-service
       dockerfile: Dockerfile
     ports:
       - '8030:8030'
-      - '8081:8081'  # Reverb WebSocket
+      # Puerto 8081 ELIMINADO (Ya no hostea websockets)
     healthcheck:
+      # Si tienes curl instalado en el Dockerfile descomenta esto:
       test: [ "CMD", "curl", "-f", "http://localhost:8030" ]
+      # Si no, usa un comando básico de php:
+      # test: ["CMD", "php", "artisan", "help"]
       interval: 30s
       timeout: 10s
       retries: 5
+      start_period: 30s
     environment:
       PHP_IDE_CONFIG: serverName=chat-service
+      # DB Message
       DB_HOST: messages-db
       DB_PORT: 5432
       DB_USERNAME: chatuser
       DB_PASSWORD: chatpass
       DB_DATABASE: messages
+
+      # Configuración Broadcasting (Para enviar eventos al servicio reverb)
       BROADCAST_DRIVER: reverb
-      REVERB_PORT: 8081
-      REVERB_APP_ID: chat-service
+      REVERB_HOST: reverb   # Nombre del servicio Docker
+      REVERB_PORT: 8080
+      REVERB_SCHEME: http
       REVERB_REDIS_HOST: redis
+      REVERB_REDIS_PORT: 6379
     volumes:
       - './chat-service:/var/www'
-    command: >
-      sh -c "php artisan serve --host=0.0.0.0 --port=8030 & php artisan reverb:start || tail -f /dev/null"
+    # Comando simplificado, solo API
+    command: [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=8030" ]
     depends_on:
       messages-db:
         condition: service_healthy
+      redis:
+        condition: service_started
     restart: unless-stopped
     networks:
       - mynetwork
@@ -148,17 +177,17 @@ services:
     networks:
       - mynetwork
 
-  # 🧠 Redis para broadcasting distribuido
+  # 🧠 Redis (Corregido para Windows)
   redis:
     image: redis:alpine
     ports:
-      - "7000:7049"
+      - "7000:6379" # Host 7000 -> Contenedor 6379 (Correcto)
     volumes:
       - ./redis-data:/data
     networks:
       - mynetwork
 
-  # 🌐 NGINX para enrutar WebSocket
+  # 🌐 NGINX
   nginx:
     image: nginx:latest
     ports:
@@ -169,6 +198,6 @@ services:
     depends_on:
       - reverb
       - chat-service
+      - my-chat
     networks:
       - mynetwork
-

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Message\Application\Command\CreateMessage;
 
+use App\Message\Domain\Events\MessageSent;
 use App\Message\Domain\Message;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
 use App\Shared\Domain\Event\EventBusInterface;
@@ -42,7 +43,7 @@ final readonly class CreateMessageHandler
 
     $this->messageRepository->insert($message);
 
-    $this->eventBus->dispatch($message);
+    $this->eventBus->dispatch(new MessageSent($message));
 
     return $message;
   }
