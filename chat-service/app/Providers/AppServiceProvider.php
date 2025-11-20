@@ -5,6 +5,8 @@ namespace App\Providers;
 
 use App\Http\Persistence\DBAL\MessageRepository;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
+use App\Message\TransformerDTO\TransformerDto;
+use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
 use App\Shared\Domain\Event\EventBusInterface;
 use App\Shared\Domain\Event\LaravelEventBus;
 use Doctrine\DBAL\DriverManager;
@@ -24,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             MessageRepositoryInterface::class,
             MessageRepository::class
+        );
+
+        $this->app->bind(
+            TransformerToDtoInterface::class,
+            TransformerDto::class
         );
 
         $this->app->singleton(Connection::class, function () {

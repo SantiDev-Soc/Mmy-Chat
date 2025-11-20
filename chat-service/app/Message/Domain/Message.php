@@ -56,19 +56,19 @@ class Message
         return $this->content;
     }
 
-    public function getSentAt(): ?DateTimeImmutable
+    public function getSentAt(): ? int
     {
-        return $this->sentAt;
+        return $this->sentAt->getTimestamp();
     }
 
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ? int
     {
-        return $this->updatedAt;
+        return $this->updatedAt->getTimestamp();
     }
 
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ? int
     {
-        return $this->createdAt;
+        return $this->createdAt->getTimestamp();
     }
 
     public function serialize(): array

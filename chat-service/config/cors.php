@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 return [
 
@@ -15,20 +16,24 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'messages/*', 'conversations/*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'broadcasting/auth', '*'], // Asegúrate que api/* esté incluido
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['*'], // Permitir POST, GET, OPTIONS, etc.
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+    'allowed_origins' => [
+        'http://localhost:8020', // Tu frontend (my-chat)
+        'http://127.0.0.1:8020',
+        'http://localhost:5173', // Vite en desarrollo
+    ],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['*'], // Permitir Content-Type y X-Requested-With
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => true,
+    'supports_credentials' => false, // true si usas cookies/sanctum, false si pasas IDs a mano
 
 ];

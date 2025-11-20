@@ -22,7 +22,12 @@ final readonly class GetMessagesWithContactHandler
             $query->contactId
         );
 
-        return $this->transformerToDto::transform($messages);
+        $data = [];
+        foreach ($messages as $message) {
+            $data[] = $this->transformerToDto::transform($message);
+        }
+
+        return $data;
     }
 }
 

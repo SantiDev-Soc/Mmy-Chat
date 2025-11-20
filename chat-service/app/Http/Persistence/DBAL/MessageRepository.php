@@ -74,7 +74,7 @@ final readonly class MessageRepository implements MessageRepositoryInterface
     }
 
     /** @throws Exception */
-    public function findContactsByUserId(UserId $userId): array
+    public function getConversationsForUserId(UserId $userId): array
     {
         $queryBuilder = $this->connection->createQueryBuilder();
 
@@ -105,7 +105,14 @@ final readonly class MessageRepository implements MessageRepositoryInterface
             ->setParameter('contactId', $contactId->getValue())
             ->orderBy('m.created_at', 'ASC');
 
-        return $qb->executeQuery()->fetchAllAssociative();
+        $messages = $qb->executeQuery()->fetchAllAssociative();
+
+        $data = [];
+        foreach ($messages as $message) {
+            $data[] = $this->getMapper()->hydrate($message);
+        }
+
+        return $data;
     }
 
 

@@ -18,11 +18,16 @@ final readonly class GetConversationsHandler
 
     public function __invoke(GetConversationsQuery $command): array
     {
-        $conversations = $this->messageRepository->findContactsByUserId($command->userId);
+        $conversations = $this->messageRepository->getConversationsForUserId($command->userId);
         if(isEmpty($conversations)) {
             return [];
         }
 
-        return $this->transformerToDto::transform($conversations);
+        $messages = [];
+        foreach ($conversations as $conversation) {
+            $messages[] = $this->transformerToDto::transform($conversation);
+        }
+
+        return $messages;
     }
 }

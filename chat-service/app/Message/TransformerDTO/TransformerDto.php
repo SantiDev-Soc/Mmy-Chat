@@ -3,27 +3,22 @@ declare(strict_types=1);
 
 namespace App\Message\TransformerDTO;
 
-use App\Message\Application\DTO\MessageDto;
+use App\Message\Application\DTO\MessageResponseDto;
+use App\Message\Domain\Message;
 use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
 
 class TransformerDto implements TransformerToDtoInterface
 {
-    public static function transform(array $row): array
+    public static function transform(Message $message): MessageResponseDto
     {
-        $data = [];
-
-        foreach ($row as $message) {
-            $dto = new MessageDto();
-            $dto->id = $message->getId();
-            $dto->senderId = $message->getSenderId();
-            $dto->receiverId = $message->getReceiverId();
+            $dto = new MessageResponseDto();
+            $dto->id = $message->getId()->getValue();
+            $dto->senderId = $message->getSenderId()->getValue();
+            $dto->receiverId = $message->getReceiverId()->getValue();
             $dto->content = $message->getContent();
             $dto->createdAt = $message->getCreatedAt();
 
-            $data[] = $dto;
-        }
-
-        return $data;
+        return $dto;
     }
 
 }

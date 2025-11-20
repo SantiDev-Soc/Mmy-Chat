@@ -69,14 +69,14 @@ final class MessageController extends Controller
         }
     }
 
-    public function getMessagesWithContact(Request $request): JsonResponse
+    public function getMessagesWithContact(string $contactId, Request $request): JsonResponse
     {
-        $data = $request->request->all();
+        $userId = $request->query('user_id');
 
         try {
             $command = new GetMessagesWithContactQuery(
-                UserId::create($data['user_id']),
-                UserId::create($data['contact_id']),
+                UserId::create($userId),
+                UserId::create($contactId),
             );
 
             $messagesWithContact = ($this->getMessagesWithContactHandler)($command);
