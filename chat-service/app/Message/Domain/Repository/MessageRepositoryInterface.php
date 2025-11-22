@@ -13,9 +13,8 @@ interface MessageRepositoryInterface
 
     /**
      * @param UserId $userId
-     * @return array Message
      */
-    public function findByUserId(UserId $userId): array;
+    public function findByUserId(UserId $userId): ?Message;
 
     public function findById(MessageId $messageId):?Message;
 

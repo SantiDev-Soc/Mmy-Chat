@@ -2,38 +2,17 @@
 declare(strict_types=1);
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Cross-Origin Resource Sharing (CORS) Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
-    */
-
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'broadcasting/auth', '*'], // Asegúrate que api/* esté incluido
-
-    'allowed_methods' => ['*'], // Permitir POST, GET, OPTIONS, etc.
-
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '*'],
+    'allowed_methods' => ['*'],
     'allowed_origins' => [
-        'http://localhost:8020', // Tu frontend (my-chat)
-        'http://127.0.0.1:8020',
-        'http://localhost:5173', // Vite en desarrollo
+        'https://localhost',       // <--- IMPORTANTE: Nginx SSL
+        'http://localhost',        // Por si entras por HTTP antes de redirigir
+        'http://localhost:8020',   // Backup para dev directo
+        'http://localhost:5173',
     ],
-
     'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'], // Permitir Content-Type y X-Requested-With
-
+    'allowed_headers' => ['*'],
     'exposed_headers' => [],
-
     'max_age' => 0,
-
-    'supports_credentials' => false, // true si usas cookies/sanctum, false si pasas IDs a mano
-
+    'supports_credentials' => false, // O true si decides compartir cookies
 ];

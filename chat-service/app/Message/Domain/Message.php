@@ -25,6 +25,8 @@ class Message
         UserId $receiverId,
         string $content,
         DateTimeImmutable $sentAt = null,
+        ?DateTimeImmutable $createdAt = null,
+        ?DateTimeImmutable $updatedAt = null
     )
     {
         $this->id = $id;
@@ -32,8 +34,8 @@ class Message
         $this->receiverId = $receiverId;
         $this->content = $content;
         $this->sentAt = $sentAt ?? new DateTimeImmutable();
-        $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
+        $this->createdAt = $createdAt ?? new DateTimeImmutable();
+        $this->updatedAt = $updatedAt ?? new DateTimeImmutable();
     }
 
     public function getId(): MessageId
