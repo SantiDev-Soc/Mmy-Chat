@@ -9,8 +9,12 @@ use App\Message\Application\Query\GetConversations\GetConversationsQuery;
 use App\Message\Application\Query\GetConversations\GetConversationsHandler;
 use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactHandler;
 use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactQuery;
+use App\Message\Domain\Exception\MessageNotFoundException;
+use App\Message\Domain\Message;
+use App\Shared\Domain\Exception\InvalidUserException;
 use App\Shared\Domain\ValueObject\UserId;
 use Illuminate\Http\Request;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Throwable;
 
@@ -41,7 +45,17 @@ final class MessageController extends Controller
                 'message' => $message->serialize()
             ], 201);
 
-        }catch (Throwable $exception){
+        } catch (InvalidUserException $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 401);
+        } catch (InvalidArgumentException $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 400);
+        } catch (Throwable $exception) {
             return response()->json([
                 'success' => false,
                 'error' => $exception->getMessage()
@@ -61,7 +75,12 @@ final class MessageController extends Controller
                 'message' => $conversations
             ], 201);
 
-        } catch (Throwable $exception){
+        } catch (MessageNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 404);
+        } catch (Throwable $exception) {
             return response()->json([
                 'success' => false,
                 'error' => $exception->getMessage()
@@ -79,6 +98,38 @@ final class MessageController extends Controller
                 UserId::create($contactId),
             );
 
+            /** @var Message[] $messagesWithContact */
+            $messagesWithContact = ($this->getMessagesWithContactHandler)($command);
+
+            // 👇 CORRECCIÓN: Mapear cada Entidad a su versión array serializada
+            $response = array_map(
+                static fn(Message $msg) => $msg->serialize(),
+                $messagesWithContact
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => $response
+            ], 201);
+
+        } catch (Throwable $exception) {
+            return response()->json([
+                'success' => false,
+                'error' => $exception->getMessage()
+            ], 500);
+        }
+    }
+
+    public function messagesRead(Request $request): JsonResponse
+    {
+        $userId = $request->query('user_id');
+
+        try {
+            $command = new GetMessagesWithContactQuery(
+                UserId::create($userId),
+                UserId::create($userId),
+            );
+
             $messagesWithContact = ($this->getMessagesWithContactHandler)($command);
 
             return response()->json([
@@ -86,7 +137,7 @@ final class MessageController extends Controller
                 'message' => $messagesWithContact
             ], 201);
 
-        } catch (Throwable $exception){
+        } catch (Throwable $exception) {
             return response()->json([
                 'success' => false,
                 'error' => $exception->getMessage()

@@ -11,7 +11,7 @@ export default function (loggedUserId) {
         currentUserId: loggedUserId,
         activeChannel: null,
         // Limpiamos la barra final si existe en el .env para evitar dobles barras
-        apiUrl: (import.meta.env.VITE_CHAT_API_URL || 'http://localhost:8030').replace(/\/$/, ''),
+        apiUrl: (import.meta.env.VITE_CHAT_API_URL || 'https://localhost').replace(/\/$/, ''),
 
         init() {
             console.log('Componente iniciado. Usuario:', this.currentUserId);
