@@ -11,40 +11,45 @@ class MessageRead
 {
     public const TABLE_NAME = 'message_reads';
     private MessageId $messageId;
-    private UserId $userId;
+    private UserId $readerId;
     private DateTimeImmutable $readAt;
 
     public function __construct(
         MessageId $messageId,
-        UserId $userId,
+        UserId $readerId,
         DateTimeImmutable $readAt = null
     )
     {
         $this->messageId = $messageId;
-        $this->userId = $userId;
+        $this->readerId = $readerId;
         $this->readAt = $readAt ?? new DateTimeImmutable();
     }
 
-    public function markAsRead(): void {
+    public function markAsRead(): void
+    {
         $this->readAt = new DateTimeImmutable();
     }
 
     public static function deserialize(array $row): self
     {
-        $messageId = $row['message_id'];
-        $userId = $row['user_id'];
-        $readAt = isset($row['read_at'])
-            ? DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $row['read_at']) :
-            new DateTimeImmutable();
-        return new self($messageId, $userId, $readAt);
+        $messageId = MessageId::create($row['message_id']);
+        $readerId = UserId::create($row['user_id']);
+        if (isset($row['read_at']) && is_string($row['read_at'])) {
+            $date = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $row['read_at']);
+            $readAt = $date !== false ? $date : new DateTimeImmutable();
+        } else {
+            $readAt = new DateTimeImmutable();
+        }
+
+        return new self($messageId, $readerId, $readAt);
     }
 
     public function serialize(): array
     {
         return [
-            'messageId' => $this->messageId->getValue(),
-            'userId' => $this->userId->getValue(),
-            'readAt' => $this->readAt->format('Y-m-d H:i:s'),
+            'message_id' => $this->messageId->getValue(),
+            'user_id' => $this->readerId->getValue(),
+            'read_at' => $this->readAt->format('Y-m-d H:i:s'),
         ];
     }
 
@@ -53,9 +58,9 @@ class MessageRead
         return $this->readAt;
     }
 
-    public function getUserId(): UserId
+    public function getReaderId(): UserId
     {
-        return $this->userId;
+        return $this->readerId;
     }
 
     public function getMessageId(): MessageId

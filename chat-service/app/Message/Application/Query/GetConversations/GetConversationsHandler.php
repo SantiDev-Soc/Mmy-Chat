@@ -25,7 +25,7 @@ final readonly class GetConversationsHandler
 
         $messages = [];
         foreach ($conversations as $conversation) {
-            $messages[] = $this->transformerToDto::transform($conversation);
+            $messages[] = $this->transformerToDto->transform($conversation);
         }
 
         return $messages;

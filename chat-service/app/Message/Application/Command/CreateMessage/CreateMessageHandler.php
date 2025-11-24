@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Message\Application\Command\CreateMessage;
 
+use App\Message\Application\DTO\MessageResponseDto;
 use App\Message\Domain\Events\MessageSent;
 use App\Message\Domain\Message;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
+use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
 use App\Shared\Domain\Event\EventBusInterface;
 use App\Shared\Domain\Exception\InvalidUserException;
 use App\Shared\Domain\ValueObject\MessageId;
@@ -17,12 +19,13 @@ final readonly class CreateMessageHandler
 
     public function __construct(
         private MessageRepositoryInterface $messageRepository,
+        private TransformerToDtoInterface  $transformerToDto,
         private EventBusInterface $eventBus,
     )
     {
     }
 
-    public function __invoke(CreateMessageCommand $command): Message
+    public function __invoke(CreateMessageCommand $command): MessageResponseDto
     {
 
         if ($command->senderId->equals($command->receiverId)) {
@@ -45,7 +48,7 @@ final readonly class CreateMessageHandler
 
         $this->eventBus->dispatch(new MessageSent($message));
 
-        return $message;
+        return $this->transformerToDto->transform($message);
     }
 
 }

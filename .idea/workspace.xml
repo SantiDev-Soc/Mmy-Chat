@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="fixing problems with the message-front &amp; adjusting back nginx as reverse proxy to use as api wateway">
-      <change afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/MessageReaded/MessageReadedCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/MessageReaded/MessageReadedHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
+    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="dev branch with all features and changes to merge in main">
+      <change afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/MessageRead/MessageReadHandler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/DTO/MessageReadResponseDto.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat-service/app/Message/TransformerDTO/MessageReadTransformerDto.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat-service/app/Shared/Application/InterfaceDto/MessageReadTransformerDtoInterface.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1259" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16414" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16414" afterDir="false" />
@@ -16,34 +17,55 @@
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16419" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16419" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16421" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16421" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16422" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16422" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16553" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16553" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16557" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16557" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16559" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16559" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/16562" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/16562" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2696" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2696" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840_fsm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840_vm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2841" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2841" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat-data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/pg_subtrans/0000" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/pg_subtrans/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/pg_xact/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-service/app/Http/Controllers/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Http/Controllers/MessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Http/Mapper/MessageReadMapper.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Http/Mapper/MessageReadMapper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Http/Persistence/DBAL/MessageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Http/Persistence/DBAL/MessageRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/CreateMessage/CreateMessageHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/CreateMessage/CreateMessageHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/MessageReaded/MessageReadedCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/MessageRead/MessageReadCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Application/Command/MessageReaded/MessageReadedHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Application/DTO/MessageResponseDto.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/DTO/MessageResponseDto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Application/Query/GetConversations/GetConversationsHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/Query/GetConversations/GetConversationsHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Application/Query/GetMessagesWithContact/GetMessagesWithContactHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Application/Query/GetMessagesWithContact/GetMessagesWithContactHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Domain/Events/MessageSent.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Domain/Events/MessageSent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Domain/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Domain/Message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Domain/MessageRead.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Domain/MessageRead.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Domain/Repository/MessageRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Domain/Repository/MessageRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/TransformerDTO/TransformerDto.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/TransformerDTO/TransformerDto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Shared/Application/InterfaceDto/TransformerToDtoInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Shared/Application/InterfaceDto/TransformerToDtoInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1259" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/24738" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24738" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24754" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24754" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24754_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24754_fsm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24754_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24754_vm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24764" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24764" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/24764_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24764_fsm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24766" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24766" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/24767" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/24767" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/2619_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619_fsm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/2619_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619_vm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/2696" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2696" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2840" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2840_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_vm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2841" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2841" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pg_subtrans/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_subtrans/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_xact/0000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redis-data/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/redis-data/dump.rdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +91,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MMY-Chat/003-connetc-events" />
+        <entry key="$PROJECT_DIR$" value="MMY-Chat/004-Dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -89,6 +111,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="MMY-Chat/005-developing-message-readed" />
+                    <option name="lastUsedInstant" value="1763986599" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="MMY-Chat/004-Dev" />
                     <option name="lastUsedInstant" value="1763801603" />
                   </RecentBranch>
@@ -103,10 +129,6 @@
                   <RecentBranch>
                     <option name="branchName" value="MMY-Chat/002-developing-front-functionalities" />
                     <option name="lastUsedInstant" value="1763196524" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="MMY-Chat/001" />
-                    <option name="lastUsedInstant" value="1761471779" />
                   </RecentBranch>
                 </list>
               </option>
@@ -455,7 +477,7 @@
     "PHPUnit.chat-service.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "MMY-Chat/004-Dev",
+    "git-widget-placeholder": "MMY-Chat/005-developing-message-readed",
     "last_opened_file_path": "D:/PROJECTS/Mmy-Daw-Project/mmy-chat-project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -484,7 +506,7 @@
       <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\mmy-chat\app\Http\Controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/mmy-chat-backup/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
@@ -515,8 +537,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -582,6 +604,7 @@
       <workItem from="1763840602609" duration="9000" />
       <workItem from="1763888899929" duration="1248000" />
       <workItem from="1763899818251" duration="2514000" />
+      <workItem from="1763986217493" duration="21173000" />
     </task>
     <task id="LOCAL-00001" summary="Preparing the branches">
       <option name="closed" value="true" />
@@ -655,7 +678,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763800443539</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="dev branch with all features and changes to merge in main">
+      <option name="closed" value="true" />
+      <created>1763986386388</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1763986386388</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,7 +712,8 @@
     <MESSAGE value="creating and connecting events" />
     <MESSAGE value="fixing problems with the message-front" />
     <MESSAGE value="fixing problems with the message-front &amp; adjusting back nginx as reverse proxy to use as api wateway" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing problems with the message-front &amp; adjusting back nginx as reverse proxy to use as api wateway" />
+    <MESSAGE value="dev branch with all features and changes to merge in main" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev branch with all features and changes to merge in main" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

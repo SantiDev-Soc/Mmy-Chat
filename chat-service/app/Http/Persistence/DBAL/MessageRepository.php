@@ -4,12 +4,16 @@ declare(strict_types=1);
 namespace App\Http\Persistence\DBAL;
 
 use App\Http\Mapper\MessageMapper;
+use App\Http\Mapper\MessageReadMapper;
 use App\Message\Domain\Message;
+use App\Message\Domain\MessageRead;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
 use App\Shared\Domain\ValueObject\MessageId;
 use App\Shared\Domain\ValueObject\UserId;
+use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 final readonly class MessageRepository implements MessageRepositoryInterface
 {
@@ -25,17 +29,17 @@ final readonly class MessageRepository implements MessageRepositoryInterface
 
     }
 
+    protected function getMessageReadMapper(): MessageReadMapper
+    {
+        return new MessageReadMapper();
+    }
+
 
     /** @throws Exception */
     public function insert(Message $message): void
     {
         $data = $this->getMapper()->serialize($message);
         $this->connection->insert(Message::TABLE_NAME, $data);
-    }
-
-    public function readBy(): void
-    {
-        // TODO: Implement readBy() method.
     }
 
     /** @throws Exception */
@@ -82,9 +86,9 @@ final readonly class MessageRepository implements MessageRepositoryInterface
             ->where('m.sender_id = :userId OR m.receiver_id = :userId')
             ->setParameter('userId', $userId->getValue());
 
-        $results = $queryBuilder->executeQuery()->fetchFirstColumn();
+        return $queryBuilder->executeQuery()->fetchFirstColumn();
 
-        return array_map(static fn($id) => UserId::create((string)$id), $results);
+        //return array_map(static fn($id) => UserId::create((string)$id), $results);
     }
 
     /** @throws Exception */
@@ -110,5 +114,15 @@ final readonly class MessageRepository implements MessageRepositoryInterface
         return $data;
     }
 
+    /** @throws Exception */
+    public function insertMarkAsRead(MessageRead $messageRead): void
+    {
+        $data = $this->getMessageReadMapper()->serialize($messageRead);
 
+        try {
+            $this->connection->insert(MessageRead::TABLE_NAME, $data);
+        } catch (UniqueConstraintViolationException $e) {
+            return;
+        }
+    }
 }

@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 
 use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
 use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
-use App\Message\Application\Command\MessageReaded\MessageReadedCommand;
-use App\Message\Application\Command\MessageReaded\MessageReadedHandler;
+use App\Message\Application\Command\MessageRead\MessageReadCommand;
+use App\Message\Application\Command\MessageRead\MessageReadHandler;
 use App\Message\Application\Query\GetConversations\GetConversationsQuery;
 use App\Message\Application\Query\GetConversations\GetConversationsHandler;
 use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactHandler;
 use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactQuery;
 use App\Message\Domain\Exception\MessageNotFoundException;
-use App\Message\Domain\Message;
 use App\Shared\Domain\Exception\InvalidUserException;
 use App\Shared\Domain\ValueObject\MessageId;
 use App\Shared\Domain\ValueObject\UserId;
+use DateTimeImmutable;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,7 +28,7 @@ final class MessageController extends Controller
         private readonly CreateMessageHandler $handler,
         private readonly GetConversationsHandler $getConversationsHandler,
         private readonly GetMessagesWithContactHandler $getMessagesWithContactHandler,
-        private readonly MessageReadedHandler $messageReadedHandler,
+        private readonly MessageReadHandler $messageReadHandler,
     )
     {
     }
@@ -43,11 +43,11 @@ final class MessageController extends Controller
                 UserId::create($data['receiver_id']),
                 $data['content']);
 
-            $message = ($this->handler)($command);
+            $messageDto = ($this->handler)($command);
 
             return response()->json([
                 'success' => true,
-                'message' => $message->serialize()
+                'message' => $messageDto
             ], 201);
 
         } catch (InvalidUserException $e) {
@@ -73,12 +73,12 @@ final class MessageController extends Controller
         try {
             $command = new GetConversationsQuery(UserId::create($userId));
 
-            $conversations = ($this->getConversationsHandler)($command);
+            $conversationsInDto = ($this->getConversationsHandler)($command);
 
             return response()->json([
                 'success' => true,
-                'message' => $conversations
-            ], 201);
+                'message' => $conversationsInDto
+            ], 200);
 
         } catch (MessageNotFoundException $e) {
             return response()->json([
@@ -103,18 +103,11 @@ final class MessageController extends Controller
                 UserId::create($contactId),
             );
 
-            /** @var Message[] $messagesWithContact */
-            $messagesWithContact = ($this->getMessagesWithContactHandler)($command);
-
-            // 👇 CORRECCIÓN: Mapear cada Entidad a su versión array serializada
-            $response = array_map(
-                static fn(Message $msg) => $msg->serialize(),
-                $messagesWithContact
-            );
+            $messagesWithContactInDto = ($this->getMessagesWithContactHandler)($command);
 
             return response()->json([
                 'success' => true,
-                'message' => $response
+                'message' => $messagesWithContactInDto
             ], 201);
 
         } catch (Throwable $exception) {
@@ -127,19 +120,25 @@ final class MessageController extends Controller
 
     public function messagesRead(Request $request): JsonResponse
     {
-        $data = $request->request->all();
+        $data = $request->validate([
+            'message_id' => 'required|string',
+            'reader_id' => 'required|string',
+        ]);
+
+        $readAt = new DateTimeImmutable();
 
         try {
-            $command = new MessageReadedCommand(
+            $command = new MessageReadCommand(
                 MessageId::create($data['message_id']),
-                UserId::create($data['user_id']),
+                UserId::create($data['reader_id']),
+                $readAt,
             );
 
-            $messageReaded = ($this->messageReadedHandler)($command);
+            $messageReadResponseDto = ($this->messageReadHandler)($command);
 
             return response()->json([
                 'success' => true,
-                'message' => $messageReaded
+                'message' => $messageReadResponseDto
             ], 201);
 
         } catch (Throwable $exception) {

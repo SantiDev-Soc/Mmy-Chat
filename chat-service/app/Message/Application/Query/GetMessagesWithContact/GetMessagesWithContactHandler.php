@@ -30,7 +30,7 @@ final readonly class GetMessagesWithContactHandler
 
         $data = [];
         foreach ($messages as $message) {
-            $data[] = $this->transformerToDto::transform($message);
+            $data[] = $this->transformerToDto->transform($message);
         }
 
         return $data;

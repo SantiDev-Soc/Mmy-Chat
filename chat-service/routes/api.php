@@ -11,10 +11,12 @@ Route::get('/health', static function () {
 
 Route::post('/messages', [MessageController::class, 'store']);
 
-Route::get('/messages/{contactId}', [MessageController::class, 'getMessagesWithContact']);
+Route::get('/messages/{contactId}', [MessageController::class, 'getMessagesWithContact'])
+    ->whereUuid('contactId');
 
-Route::get('/conversations/{userId}', [MessageController::class, 'getConversations']);
+Route::get('/conversations/{userId}', [MessageController::class, 'getConversations'])
+    ->whereUuid('userId');
 
-Route::get('/readed/{userId}', [MessageController::class, 'messagesRead']);
+Route::post('/messages/read', [MessageController::class, 'messagesRead']);
 
 

@@ -5,7 +5,9 @@ namespace App\Providers;
 
 use App\Http\Persistence\DBAL\MessageRepository;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
+use App\Message\TransformerDTO\MessageReadTransformerDto;
 use App\Message\TransformerDTO\TransformerDto;
+use App\Shared\Application\InterfaceDto\MessageReadTransformerDtoInterface;
 use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
 use App\Shared\Domain\Event\EventBusInterface;
 use App\Shared\Domain\Event\LaravelEventBus;
@@ -30,7 +32,12 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(
             TransformerToDtoInterface::class,
-            TransformerDto::class
+            TransformerDto::class,
+        );
+
+        $this->app->bind(
+            MessageReadTransformerDtoInterface::class,
+            MessageReadTransformerDto::class,
         );
 
         $this->app->singleton(Connection::class, function () {
