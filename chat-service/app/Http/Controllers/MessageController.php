@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
 use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
+use App\Message\Application\Command\MessageReaded\MessageReadedCommand;
+use App\Message\Application\Command\MessageReaded\MessageReadedHandler;
 use App\Message\Application\Query\GetConversations\GetConversationsQuery;
 use App\Message\Application\Query\GetConversations\GetConversationsHandler;
 use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactHandler;
@@ -12,6 +14,7 @@ use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactQ
 use App\Message\Domain\Exception\MessageNotFoundException;
 use App\Message\Domain\Message;
 use App\Shared\Domain\Exception\InvalidUserException;
+use App\Shared\Domain\ValueObject\MessageId;
 use App\Shared\Domain\ValueObject\UserId;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
@@ -20,10 +23,12 @@ use Throwable;
 
 final class MessageController extends Controller
 {
+
     public function __construct(
         private readonly CreateMessageHandler $handler,
         private readonly GetConversationsHandler $getConversationsHandler,
         private readonly GetMessagesWithContactHandler $getMessagesWithContactHandler,
+        private readonly MessageReadedHandler $messageReadedHandler,
     )
     {
     }
@@ -122,19 +127,19 @@ final class MessageController extends Controller
 
     public function messagesRead(Request $request): JsonResponse
     {
-        $userId = $request->query('user_id');
+        $data = $request->request->all();
 
         try {
-            $command = new GetMessagesWithContactQuery(
-                UserId::create($userId),
-                UserId::create($userId),
+            $command = new MessageReadedCommand(
+                MessageId::create($data['message_id']),
+                UserId::create($data['user_id']),
             );
 
-            $messagesWithContact = ($this->getMessagesWithContactHandler)($command);
+            $messageReaded = ($this->messageReadedHandler)($command);
 
             return response()->json([
                 'success' => true,
-                'message' => $messagesWithContact
+                'message' => $messageReaded
             ], 201);
 
         } catch (Throwable $exception) {
