@@ -102,4 +102,5 @@ class Message
 
         return new self($id, $senderId, $receiverId, $content, $sentAt, $createdAt, $updatedAt);
     }
+
 }

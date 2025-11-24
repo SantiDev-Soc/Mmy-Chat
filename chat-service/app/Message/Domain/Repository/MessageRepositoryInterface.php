@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace App\Message\Domain\Repository;
 
 use App\Message\Domain\Message;
+use App\Message\Domain\MessageRead;
 use App\Shared\Domain\ValueObject\MessageId;
 use App\Shared\Domain\ValueObject\UserId;
+use DateTimeImmutable;
 
 interface MessageRepositoryInterface
 {
@@ -20,7 +22,7 @@ interface MessageRepositoryInterface
 
     public function getConversationsForUserId(UserId $userId): array;
 
-    public function readBy():void;
+    public function insertMarkAsRead(MessageRead $messageRead): void;
 
     public function findMessagesWithContact(UserId $userId, UserId $contactId): array;
 

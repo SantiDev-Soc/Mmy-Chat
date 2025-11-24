@@ -8,6 +8,6 @@ use App\Message\Domain\Message;
 
 interface TransformerToDtoInterface
 {
-    public static function transform(Message $message): MessageResponseDto;
+    public function transform(Message $message): MessageResponseDto;
 
 }

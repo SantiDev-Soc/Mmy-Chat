@@ -23,7 +23,6 @@ class MessageSent implements ShouldBroadcast, ShouldQueue
     {
         $this->senderId = $message->getSenderId()->getValue();
         $this->receiverId = $message->getReceiverId()->getValue();
-
         $this->payload = $message->serialize();
     }
 
@@ -38,7 +37,10 @@ class MessageSent implements ShouldBroadcast, ShouldQueue
 
         $channelName = 'conversation.' . implode('.', $participants);
 
-        return [new PrivateChannel($channelName)];
+        return [
+            new PrivateChannel($channelName),
+            new PrivateChannel('user.' . $this->receiverId),
+        ];
     }
 
     public function broadcastWith(): array
