@@ -39,7 +39,7 @@ final readonly class MessageRepository implements MessageRepositoryInterface
     }
 
     /** @throws Exception */
-    public function findByUserId(UserId $userId): array
+    public function findByUserId(UserId $userId): ?Message
     {
         $queryBuilder = $this->connection->createQueryBuilder();
         $queryBuilder
@@ -48,14 +48,9 @@ final readonly class MessageRepository implements MessageRepositoryInterface
             ->where('m.sender_id = :userId')
             ->setParameter('userId', $userId->getValue());
 
-        $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+        $result = $queryBuilder->executeQuery()->fetchAssociative();
 
-        $messages = [];
-        foreach ($results as $message) {
-            $messages[] = $this->getMapper()->hydrate($message);
-        }
-
-        return $messages;
+        return $this->getMapper()->hydrate($result);
     }
 
     /** @throws Exception */

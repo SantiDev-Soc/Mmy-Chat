@@ -15,37 +15,37 @@ use InvalidArgumentException;
 final readonly class CreateMessageHandler
 {
 
-  public function __construct(
-      private MessageRepositoryInterface $messageRepository,
-      private EventBusInterface $eventBus,
-  )
-  {
-  }
+    public function __construct(
+        private MessageRepositoryInterface $messageRepository,
+        private EventBusInterface $eventBus,
+    )
+    {
+    }
 
-  public function __invoke(CreateMessageCommand $command): Message
-  {
+    public function __invoke(CreateMessageCommand $command): Message
+    {
 
-   if($command->senderId->equals($command->receiverId)){
-       throw new InvalidUserException();
-   }
+        if ($command->senderId->equals($command->receiverId)) {
+            throw new InvalidUserException();
+        }
 
-   if(trim($command->content) === '') {
-       throw new InvalidArgumentException('Content cannot be empty');
-   }
+        if (trim($command->content) === '') {
+            throw new InvalidArgumentException('Content cannot be empty');
+        }
 
-    $message = new Message(
-        MessageId::random(),
-        $command->senderId,
-        $command->receiverId,
-        $command->content,
-        new DateTimeImmutable(),
-    );
+        $message = new Message(
+            MessageId::random(),
+            $command->senderId,
+            $command->receiverId,
+            $command->content,
+            new DateTimeImmutable(),
+        );
 
-    $this->messageRepository->insert($message);
+        $this->messageRepository->insert($message);
 
-    $this->eventBus->dispatch(new MessageSent($message));
+        $this->eventBus->dispatch(new MessageSent($message));
 
-    return $message;
-  }
+        return $message;
+    }
 
 }
