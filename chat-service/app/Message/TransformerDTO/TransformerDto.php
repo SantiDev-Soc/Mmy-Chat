@@ -16,9 +16,9 @@ class TransformerDto implements TransformerToDtoInterface
             $message->getContent(),
             $message->getSenderId()->getValue(),
             $message->getReceiverId()->getValue(),
-            $message->getSentAt(),
-            $message->getCreatedAt(),
-            $message->getUpdatedAt()
+            $message->getSentAt()?->format('c'),
+            $message->getCreatedAt()?->format('c'),
+            $message->getUpdatedAt()?->format('c'),
         );
 
     }

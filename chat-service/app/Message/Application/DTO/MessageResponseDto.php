@@ -10,9 +10,9 @@ class MessageResponseDto
         public string $content,
         public string $sender_id,
         public string $receiver_id,
-        public int $sent_at,
-        public ?int $created_at,
-        public ?int $updated_at,
+        public ?string $sent_at,
+        public ?string $created_at,
+        public ?string $updated_at,
     )
     {
     }

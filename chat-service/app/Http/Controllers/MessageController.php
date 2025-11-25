@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
 use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
+use App\Message\Application\Command\DeleteChat\DeleteChatCommand;
+use App\Message\Application\Command\DeleteChat\DeleteChatHandler;
 use App\Message\Application\Command\MessageRead\MessageReadCommand;
 use App\Message\Application\Command\MessageRead\MessageReadHandler;
 use App\Message\Application\Query\GetConversations\GetConversationsQuery;
@@ -29,6 +31,7 @@ final class MessageController extends Controller
         private readonly GetConversationsHandler $getConversationsHandler,
         private readonly GetMessagesWithContactHandler $getMessagesWithContactHandler,
         private readonly MessageReadHandler $messageReadHandler,
+        private readonly DeleteChatHandler $deleteChatHandler,
     )
     {
     }
@@ -145,6 +148,28 @@ final class MessageController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => $exception->getMessage()
+            ], 500);
+        }
+    }
+
+    public function deleteConversation(string $contactId, Request $request): JsonResponse
+    {
+        $userId = $request->query('user_id');
+
+        try {
+            $command = new DeleteChatCommand(
+                UserId::create($userId),
+                UserId::create($contactId)
+            );
+
+            ($this->deleteChatHandler)($command);
+
+            return response()->json(['success' => true], 200);
+
+        } catch (Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
             ], 500);
         }
     }

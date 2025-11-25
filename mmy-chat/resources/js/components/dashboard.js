@@ -341,5 +341,36 @@ export default function (loggedUserId) {
         nextResult() { if (this.activeIndex < this.results.length - 1) this.activeIndex++; },
         prevResult() { if (this.activeIndex > 0) this.activeIndex--; },
         chooseResult() { if (this.activeIndex >= 0) this.select(this.results[this.activeIndex]); },
+
+
+        async deleteChat(chat) {
+            if (!confirm('¿Seguro que quieres borrar este chat? Se perderá el historial.')) return;
+
+            const contactId = chat.participant_id || chat.id;
+
+            try {
+                // Llamada DELETE al backend
+                const res = await fetch(`${this.apiUrl}/api/conversations/${contactId}?user_id=${this.currentUserId}`, {
+                    method: 'DELETE',
+                    headers: {'Accept': 'application/json'}
+                });
+
+                if (res.ok) {
+                    // 1. Eliminar visualmente del array
+                    this.chats = this.chats.filter(c =>
+                        String(c.participant_id || c.id) !== String(contactId)
+                    );
+
+                    // 2. Si tenía ese chat abierto, lo cierro
+                    if (this.selectedContact.id && String(this.selectedContact.id) === String(contactId)) {
+                        this.selectedContact = {};
+                        this.messages = [];
+                    }
+                }
+            } catch (e) {
+                console.error("Error borrando chat:", e);
+            }
+        },
     }
+
 }

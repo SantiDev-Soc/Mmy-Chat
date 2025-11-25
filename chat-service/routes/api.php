@@ -19,4 +19,5 @@ Route::get('/conversations/{userId}', [MessageController::class, 'getConversatio
 
 Route::post('/messages/read', [MessageController::class, 'messagesRead']);
 
-
+Route::delete('/conversations/{contactId}', [MessageController::class, 'deleteConversation'])
+    ->whereUuid('contactId');
