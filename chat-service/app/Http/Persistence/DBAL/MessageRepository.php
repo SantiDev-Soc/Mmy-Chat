@@ -102,7 +102,7 @@ final readonly class MessageRepository implements MessageRepositoryInterface
             ->orWhere('(m.sender_id = :contactId AND m.receiver_id = :userId)')
             ->setParameter('userId', $userId->getValue())
             ->setParameter('contactId', $contactId->getValue())
-            ->orderBy('m.created_at', 'ASC');
+            ->orderBy('m.sent_at', 'ASC');
 
         $messages = $qb->executeQuery()->fetchAllAssociative();
 
@@ -124,5 +124,19 @@ final readonly class MessageRepository implements MessageRepositoryInterface
         } catch (UniqueConstraintViolationException $e) {
             return;
         }
+    }
+
+    /** @throws Exception */
+    public function deleteChatHistory(UserId $userId, UserId $contactId): void
+    {
+        $qb = $this->connection->createQueryBuilder();
+
+        $qb->delete(Message::TABLE_NAME)
+            ->where('(sender_id = :userId AND receiver_id = :contactId)')
+            ->orWhere('(sender_id = :contactId AND receiver_id = :userId)')
+            ->setParameter('userId', $userId->getValue())
+            ->setParameter('contactId', $contactId->getValue());
+
+        $qb->executeStatement();
     }
 }

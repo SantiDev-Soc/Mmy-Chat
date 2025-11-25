@@ -26,4 +26,5 @@ interface MessageRepositoryInterface
 
     public function findMessagesWithContact(UserId $userId, UserId $contactId): array;
 
+    public function deleteChatHistory(UserId $userId, UserId $contactId): void;
 }

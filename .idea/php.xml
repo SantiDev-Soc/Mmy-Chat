@@ -303,7 +303,7 @@
       <path value="$PROJECT_DIR$/mmy-chat/vendor/paragonie/constant_time_encoding" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
   <component name="PhpStan">
     <PhpStan_settings>
       <phpstan_by_interpreter asDefaultInterpreter="true" interpreter_id="2a209509-f05b-4ab0-aca9-8f01b065a25c" timeout="60000" />
