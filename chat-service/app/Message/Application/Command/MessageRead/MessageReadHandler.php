@@ -43,7 +43,7 @@ final readonly class MessageReadHandler
         $this->messageRepository->insertMarkAsRead($markAsRead);
 
         sort($participants);
-        $channel = $participants[0] . '.' . $participants[1];
+        $channel = $participants[0] .'.'. $participants[1];
 
         $event = new MessageReadEvent(
             $channel,

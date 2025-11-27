@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
 use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
-use App\Message\Application\Command\DeleteChat\DeleteChatCommand;
-use App\Message\Application\Command\DeleteChat\DeleteChatHandler;
+use App\Message\Application\Command\ChatCleared\ChatClearedCommand;
+use App\Message\Application\Command\ChatCleared\ChatClearedHandler;
 use App\Message\Application\Command\MessageRead\MessageReadCommand;
 use App\Message\Application\Command\MessageRead\MessageReadHandler;
 use App\Message\Application\Query\GetConversations\GetConversationsQuery;
@@ -31,7 +31,7 @@ final class MessageController extends Controller
         private readonly GetConversationsHandler $getConversationsHandler,
         private readonly GetMessagesWithContactHandler $getMessagesWithContactHandler,
         private readonly MessageReadHandler $messageReadHandler,
-        private readonly DeleteChatHandler $deleteChatHandler,
+        private readonly ChatClearedHandler $chatClearedHandler,
     )
     {
     }
@@ -44,7 +44,8 @@ final class MessageController extends Controller
             $command = new CreateMessageCommand(
                 UserId::create($data['sender_id']),
                 UserId::create($data['receiver_id']),
-                $data['content']);
+                $data['content'])
+            ;
 
             $messageDto = ($this->handler)($command);
 
@@ -152,17 +153,17 @@ final class MessageController extends Controller
         }
     }
 
-    public function deleteConversation(string $contactId, Request $request): JsonResponse
+    public function clearConversation(string $contactId, Request $request): JsonResponse
     {
         $userId = $request->query('user_id');
 
         try {
-            $command = new DeleteChatCommand(
+            $command = new ChatClearedCommand(
                 UserId::create($userId),
                 UserId::create($contactId)
             );
 
-            ($this->deleteChatHandler)($command);
+            ($this->chatClearedHandler)($command);
 
             return response()->json(['success' => true], 200);
 
