@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->char('id', 36)->primary();
             $table->char('sender_id', 36);
             $table->char('receiver_id', 36);
-            $table->string('message');
+            $table->text('message');
             $table->timestamp('sent_at')->useCurrent();
             $table->timestamps();
         });

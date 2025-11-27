@@ -10,10 +10,10 @@ use App\Message\Domain\MessageRead;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
 use App\Shared\Domain\ValueObject\MessageId;
 use App\Shared\Domain\ValueObject\UserId;
-use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Throwable;
 
 final readonly class MessageRepository implements MessageRepositoryInterface
 {
@@ -54,6 +54,10 @@ final readonly class MessageRepository implements MessageRepositoryInterface
 
         $result = $queryBuilder->executeQuery()->fetchAssociative();
 
+        if ($result === false) {
+            return null;
+        }
+
         return $this->getMapper()->hydrate($result);
     }
 
@@ -69,26 +73,37 @@ final readonly class MessageRepository implements MessageRepositoryInterface
 
         $result = $queryBuilder->executeQuery()->fetchAssociative();
 
+        if ($result === false) {
+            return null;
+        }
+
         return $this->getMapper()->hydrate($result);
     }
 
     /** @throws Exception */
     public function getConversationsForUserId(UserId $userId): array
     {
-        $queryBuilder = $this->connection->createQueryBuilder();
+        $qb = $this->connection->createQueryBuilder();
 
-        $queryBuilder
-            ->select('DISTINCT CASE
-                    WHEN m.sender_id = :userId THEN m.receiver_id
-                    ELSE m.sender_id
-                  END AS contact_id')
+        $unreadSubQuery = sprintf(
+            "(SELECT COUNT(*) FROM %s m2
+              LEFT JOIN %s mr ON m2.id = mr.message_id AND mr.user_id = :userId
+              WHERE m2.receiver_id = :userId
+              AND m2.sender_id = (CASE WHEN m.sender_id = :userId THEN m.receiver_id ELSE m.sender_id END)
+              AND m2.deleted_by_receiver = 'false'
+              AND mr.read_at IS NULL)",
+            Message::TABLE_NAME,
+            MessageRead::TABLE_NAME
+        );
+
+        $qb->select('DISTINCT CASE
+             WHEN m.sender_id = :userId THEN m.receiver_id ELSE m.sender_id END AS contact_id')
             ->from(Message::TABLE_NAME, 'm')
+            ->addSelect("$unreadSubQuery AS unread_count")
             ->where('m.sender_id = :userId OR m.receiver_id = :userId')
             ->setParameter('userId', $userId->getValue());
 
-        return $queryBuilder->executeQuery()->fetchFirstColumn();
-
-        //return array_map(static fn($id) => UserId::create((string)$id), $results);
+        return $qb->executeQuery()->fetchAllAssociative();
     }
 
     /** @throws Exception */
@@ -96,10 +111,19 @@ final readonly class MessageRepository implements MessageRepositoryInterface
     {
         $qb = $this->connection->createQueryBuilder();
 
-        $qb->select('m.id, m.sender_id, m.receiver_id, m.content, m.created_at')
+        $qb->select('
+                m.id,
+                m.sender_id,
+                m.receiver_id,
+                m.content,
+                m.sent_at,
+                m.created_at,
+                mr.read_at'
+        )
             ->from(Message::TABLE_NAME, 'm')
-            ->where('(m.sender_id = :userId AND m.receiver_id = :contactId)')
-            ->orWhere('(m.sender_id = :contactId AND m.receiver_id = :userId)')
+            ->leftJoin('m', MessageRead::TABLE_NAME, 'mr', 'm.id = mr.message_id AND mr.user_id != m.sender_id')
+            ->where('(m.sender_id = :userId AND m.receiver_id = :contactId) AND m.deleted_by_sender = false')
+            ->orWhere('(m.sender_id = :contactId AND m.receiver_id = :userId) AND m.deleted_by_receiver = false')
             ->setParameter('userId', $userId->getValue())
             ->setParameter('contactId', $contactId->getValue())
             ->orderBy('m.sent_at', 'ASC');
@@ -126,17 +150,33 @@ final readonly class MessageRepository implements MessageRepositoryInterface
         }
     }
 
-    /** @throws Exception */
-    public function deleteChatHistory(UserId $userId, UserId $contactId): void
+    /**
+     * @throws Exception
+     * @throws Throwable
+     */
+    public function clearChatHistory(UserId $userId, UserId $contactId): void
     {
-        $qb = $this->connection->createQueryBuilder();
+        $this->connection->transactional(function ($conn) use ($userId, $contactId) {
+            $usrId = $userId->getValue();
+            $cntId = $contactId->getValue();
 
-        $qb->delete(Message::TABLE_NAME)
-            ->where('(sender_id = :userId AND receiver_id = :contactId)')
-            ->orWhere('(sender_id = :contactId AND receiver_id = :userId)')
-            ->setParameter('userId', $userId->getValue())
-            ->setParameter('contactId', $contactId->getValue());
+            $conn->createQueryBuilder()
+                ->update(Message::TABLE_NAME)
+                ->set('deleted_by_sender', 'true')
+                ->where('sender_id = :userId AND receiver_id = :contactId')
+                ->setParameter('userId', $usrId)
+                ->setParameter('contactId', $cntId)
+                ->executeStatement();
 
-        $qb->executeStatement();
+            $conn->createQueryBuilder()
+                ->update(Message::TABLE_NAME)
+                ->set('deleted_by_receiver', 'true')
+                ->where('receiver_id = :userId AND sender_id = :contactId')
+                ->setParameter('userId', $usrId)
+                ->setParameter('contactId', $cntId)
+                ->executeStatement();
+        });
     }
+
+
 }

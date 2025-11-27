@@ -19,7 +19,7 @@ final readonly class CreateMessageHandler
 
     public function __construct(
         private MessageRepositoryInterface $messageRepository,
-        private TransformerToDtoInterface  $transformerToDto,
+        private TransformerToDtoInterface $transformerToDto,
         private EventBusInterface $eventBus,
     )
     {
@@ -37,11 +37,14 @@ final readonly class CreateMessageHandler
         }
 
         $message = new Message(
-            MessageId::random(),
-            $command->senderId,
-            $command->receiverId,
-            $command->content,
-            new DateTimeImmutable(),
+            id: MessageId::random(),
+            senderId: $command->senderId,
+            receiverId: $command->receiverId,
+            content: $command->content,
+            sentAt: new DateTimeImmutable(),
+            readAt: null,
+            createdAt: new DateTimeImmutable(),
+            updatedAt: new DateTimeImmutable(),
         );
 
         $this->messageRepository->insert($message);

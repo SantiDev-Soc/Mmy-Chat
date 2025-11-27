@@ -11,3 +11,5 @@ tests
 public/build
 .data\global
 .data\base\16384
+.data\base\
+.chat-data\base\

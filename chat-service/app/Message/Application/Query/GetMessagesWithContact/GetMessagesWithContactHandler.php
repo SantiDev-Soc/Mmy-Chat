@@ -20,7 +20,7 @@ final readonly class GetMessagesWithContactHandler
     {
         $message = $this->messageRepository->findByUserId($query->userId);
         if (null === $message) {
-            throw new MessageNotFoundException();
+            return [];
         }
 
         $messages = $this->messageRepository->findMessagesWithContact(

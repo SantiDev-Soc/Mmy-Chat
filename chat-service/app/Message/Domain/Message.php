@@ -15,9 +15,10 @@ class Message
     private UserId $senderId;
     private UserId $receiverId;
     private string $content;
-    private ?DateTimeImmutable $sentAt;
-    private ?DateTimeImmutable $createdAt;
-    private ?DateTimeImmutable $updatedAt;
+    private DateTimeImmutable $sentAt;
+    private ?DateTimeImmutable $readAt;
+    private DateTimeImmutable $createdAt;
+    private DateTimeImmutable $updatedAt;
 
 
     public function __construct(
@@ -25,9 +26,10 @@ class Message
         UserId $senderId,
         UserId $receiverId,
         string $content,
-        ?DateTimeImmutable $sentAt = null,
-        ?DateTimeImmutable $createdAt = null,
-        ?DateTimeImmutable $updatedAt = null
+        DateTimeImmutable $sentAt,
+        ?DateTimeImmutable $readAt,
+        DateTimeImmutable $createdAt,
+        DateTimeImmutable $updatedAt
     )
     {
         $this->id = $id;
@@ -35,6 +37,7 @@ class Message
         $this->receiverId = $receiverId;
         $this->content = $content;
         $this->sentAt = $sentAt ?? new DateTimeImmutable();
+        $this->readAt = $readAt;
         $this->createdAt = $createdAt ?? new DateTimeImmutable();
         $this->updatedAt = $updatedAt ?? new DateTimeImmutable();
     }
@@ -64,6 +67,11 @@ class Message
         return $this->sentAt;
     }
 
+    public function getReadAt(): ?DateTimeImmutable
+    {
+        return $this->readAt;
+    }
+
     public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updatedAt;
@@ -81,9 +89,9 @@ class Message
             'sender_id' => $this->senderId->getValue(),
             'receiver_id' => $this->receiverId->getValue(),
             'content' => $this->content,
-            'sent_at' => $this->sentAt?->format('Y-m-d H:i:s'),
-            'created_at' => $this->createdAt?->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updatedAt?->format('Y-m-d H:i:s'),
+            'sent_at' => $this->sentAt->format('Y-m-d H:i:s'),
+            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
         ];
     }
 
@@ -95,10 +103,12 @@ class Message
         $content = $data['content'];
         $sentAtRaw = $data['sent_at'] ?? $data['created_at'] ?? null;
         $sentAt = self::dateTime($sentAtRaw);
+        $readAtRaw = $data['read_at'] ?? null;
+        $readAt = $readAtRaw ? self::dateTime($readAtRaw) : null;
         $createdAt = isset($data['created_at']) ? self::dateTime($data['created_at']) : $sentAt;
         $updatedAt = isset($data['updated_at']) ? self::dateTime($data['updated_at']) : $sentAt;
 
-        return new self($id, $senderId, $receiverId, $content, $sentAt, $createdAt, $updatedAt);
+        return new self($id, $senderId, $receiverId, $content, $sentAt, $readAt, $createdAt, $updatedAt);
     }
 
     private static function dateTime(?string $dateStr): DateTimeImmutable
