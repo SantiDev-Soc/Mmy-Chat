@@ -53,7 +53,7 @@ export const apiMensajes = {
     },
 
     async limpiarChat(chat) {
-        if (!confirm('Limpiar este chat? Desaparecerá de tu lista.')) return;
+        if (!confirm('Borrar este chat? Desaparecerá de tu lista.')) return;
         const idContacto = String(chat.participant_id || chat.id);
 
         try {

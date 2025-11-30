@@ -6,60 +6,68 @@ export const apiContactos = {
             this.chatAbierto = false;
             return;
         }
+
         try {
             const respuesta = await fetch(`/contacts/search?q=${this.busqueda}`);
             this.resultadosBusqueda = await respuesta.json();
             this.chatAbierto = this.resultadosBusqueda.length > 0;
             this.indiceActivo = -1;
+
         } catch (error) {
             console.error("Error buscando contactos:", error);
         }
     },
 
-        async cargarMisConversaciones(idUsuario) {
-            try {
-                const resChat = await fetch(`${this.api}/api/conversations/${idUsuario}`, {
-                    headers: {'Accept': 'application/json'}
-                });
-                const datosChat = await resChat.json();
+    async cargarMisConversaciones(idUsuario) {
 
-                const listaConversaciones = datosChat.success ? datosChat.message : [];
-
-                if (listaConversaciones.length === 0) {
-                    this.conversaciones = [];
-                    return;
+        try {
+            const resChat = await fetch(`${this.api}/api/conversations/${idUsuario}`, {
+                headers: {
+                    'Accept': 'application/json'
                 }
+            });
 
-                listaConversaciones.forEach(item => {
-                    const idNormalizado = String(item.contact_id).toLowerCase();
-                    this.contadores[idNormalizado] = item.unread_count;
-                });
+            const datosChat = await resChat.json();
 
-                const idsParaPedir = listaConversaciones.map(c => c.contact_id);
-                const idsParam = idsParaPedir.join(',');
+            const listaDTOs = datosChat.success ? datosChat.message : [];
 
-                const resUsuarios = await fetch(`/users/batch?ids=${idsParam}`);
-                const datosUsuarios = await resUsuarios.json();
-
-                this.conversaciones = listaConversaciones.map(item => {
-                    const idContacto = item.contact_id;
-
-                    const usuario = datosUsuarios.find(u =>
-                        String(u.id).toLowerCase() === String(idContacto).toLowerCase()
-                    );
-
-                    return {
-                        id: idContacto,
-                        participant_id: idContacto,
-                        name: usuario ? usuario.name : 'Usuario Desconocido',
-                        created_at: new Date().toISOString()
-                    };
-                });
-
-            } catch (e) {
-                console.error("Error cargando conversaciones:", e);
+            if (listaDTOs.length === 0) {
+                this.conversaciones = [];
+                return;
             }
-        },
+
+            listaDTOs.forEach(dto => {
+                if (dto.contact_id) {
+                    const idNormalizado = String(dto.contact_id).toLowerCase();
+                    this.contadores[idNormalizado] = dto.unread_count;
+                }
+            });
+
+            const idsParaPedir = listaDTOs.map(dto => dto.contact_id);
+            const idsParam = idsParaPedir.join(',');
+
+            const resUsuarios = await fetch(`/users/batch?ids=${idsParam}`);
+            const datosUsuarios = await resUsuarios.json();
+
+            this.conversaciones = listaDTOs.map(dto => {
+                const idContacto = dto.contact_id;
+
+                const usuario = datosUsuarios.find(u =>
+                    String(u.id).toLowerCase() === String(idContacto).toLowerCase()
+                );
+
+                return {
+                    id: idContacto,
+                    participant_id: idContacto,
+                    name: usuario ? usuario.name : 'Usuario Desconocido',
+                    created_at: new Date().toISOString()
+                };
+            });
+
+        } catch (e) {
+            console.error("Error cargando conversaciones:", e);
+        }
+    },
 
     async obtenerNombreContacto(idUsuario) {
         try {
@@ -70,6 +78,7 @@ export const apiContactos = {
                 String(c.id || c.participant_id).toLowerCase() === String(idUsuario).toLowerCase()
             );
             if (chat && usuario.name) chat.name = usuario.name;
+
         } catch (e) {
             console.warn("Error nombre contacto:", e);
         }
