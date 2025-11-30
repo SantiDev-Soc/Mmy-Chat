@@ -9,16 +9,19 @@ use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
 
 class TransformerDto implements TransformerToDtoInterface
 {
-    public static function transform(Message $message): MessageResponseDto
+    public function transform(Message $message): MessageResponseDto
     {
-            $dto = new MessageResponseDto();
-            $dto->id = $message->getId()->getValue();
-            $dto->senderId = $message->getSenderId()->getValue();
-            $dto->receiverId = $message->getReceiverId()->getValue();
-            $dto->content = $message->getContent();
-            $dto->createdAt = $message->getCreatedAt();
+        return new MessageResponseDto(
+            $message->getId()->getValue(),
+            $message->getContent(),
+            $message->getSenderId()->getValue(),
+            $message->getReceiverId()->getValue(),
+            $message->getSentAt()->format('c'),
+            $message->getReadAt()?->format('c'),
+            $message->getCreatedAt()->format('c'),
+            $message->getUpdatedAt()->format('c'),
+        );
 
-        return $dto;
     }
 
 }

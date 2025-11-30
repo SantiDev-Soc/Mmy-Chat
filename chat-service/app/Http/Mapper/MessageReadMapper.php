@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Http\Mapper;
 
-use App\Message\Domain\Message;
 use App\Message\Domain\MessageRead;
 use App\Shared\Domain\Repository\MapperInterface;
 
@@ -15,7 +14,7 @@ class MessageReadMapper implements MapperInterface
     }
 
     /**
-     * @param Message $entity
+     * @param MessageRead $entity
      */
     public function serialize($entity): array
     {

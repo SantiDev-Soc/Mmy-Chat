@@ -4,12 +4,16 @@ declare(strict_types=1);
 namespace App\Http\Persistence\DBAL;
 
 use App\Http\Mapper\MessageMapper;
+use App\Http\Mapper\MessageReadMapper;
 use App\Message\Domain\Message;
+use App\Message\Domain\MessageRead;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
 use App\Shared\Domain\ValueObject\MessageId;
 use App\Shared\Domain\ValueObject\UserId;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Throwable;
 
 final readonly class MessageRepository implements MessageRepositoryInterface
 {
@@ -25,17 +29,17 @@ final readonly class MessageRepository implements MessageRepositoryInterface
 
     }
 
+    protected function getMessageReadMapper(): MessageReadMapper
+    {
+        return new MessageReadMapper();
+    }
+
 
     /** @throws Exception */
     public function insert(Message $message): void
     {
         $data = $this->getMapper()->serialize($message);
         $this->connection->insert(Message::TABLE_NAME, $data);
-    }
-
-    public function readBy(): void
-    {
-        // TODO: Implement readBy() method.
     }
 
     /** @throws Exception */
@@ -49,6 +53,10 @@ final readonly class MessageRepository implements MessageRepositoryInterface
             ->setParameter('userId', $userId->getValue());
 
         $result = $queryBuilder->executeQuery()->fetchAssociative();
+
+        if ($result === false) {
+            return null;
+        }
 
         return $this->getMapper()->hydrate($result);
     }
@@ -65,26 +73,37 @@ final readonly class MessageRepository implements MessageRepositoryInterface
 
         $result = $queryBuilder->executeQuery()->fetchAssociative();
 
+        if ($result === false) {
+            return null;
+        }
+
         return $this->getMapper()->hydrate($result);
     }
 
     /** @throws Exception */
     public function getConversationsForUserId(UserId $userId): array
     {
-        $queryBuilder = $this->connection->createQueryBuilder();
+        $qb = $this->connection->createQueryBuilder();
 
-        $queryBuilder
-            ->select('DISTINCT CASE
-                    WHEN m.sender_id = :userId THEN m.receiver_id
-                    ELSE m.sender_id
-                  END AS contact_id')
+        $unreadSubQuery = sprintf(
+            "(SELECT COUNT(*) FROM %s m2
+              LEFT JOIN %s mr ON m2.id = mr.message_id AND mr.user_id = :userId
+              WHERE m2.receiver_id = :userId
+              AND m2.sender_id = (CASE WHEN m.sender_id = :userId THEN m.receiver_id ELSE m.sender_id END)
+              AND m2.deleted_by_receiver = 'false'
+              AND mr.read_at IS NULL)",
+            Message::TABLE_NAME,
+            MessageRead::TABLE_NAME
+        );
+
+        $qb->select('DISTINCT CASE
+             WHEN m.sender_id = :userId THEN m.receiver_id ELSE m.sender_id END AS contact_id')
             ->from(Message::TABLE_NAME, 'm')
+            ->addSelect("$unreadSubQuery AS unread_count")
             ->where('m.sender_id = :userId OR m.receiver_id = :userId')
             ->setParameter('userId', $userId->getValue());
 
-        $results = $queryBuilder->executeQuery()->fetchFirstColumn();
-
-        return array_map(static fn($id) => UserId::create((string)$id), $results);
+        return $qb->executeQuery()->fetchAllAssociative();
     }
 
     /** @throws Exception */
@@ -92,13 +111,22 @@ final readonly class MessageRepository implements MessageRepositoryInterface
     {
         $qb = $this->connection->createQueryBuilder();
 
-        $qb->select('m.id, m.sender_id, m.receiver_id, m.content, m.created_at')
+        $qb->select('
+                m.id,
+                m.sender_id,
+                m.receiver_id,
+                m.content,
+                m.sent_at,
+                m.created_at,
+                mr.read_at'
+        )
             ->from(Message::TABLE_NAME, 'm')
-            ->where('(m.sender_id = :userId AND m.receiver_id = :contactId)')
-            ->orWhere('(m.sender_id = :contactId AND m.receiver_id = :userId)')
+            ->leftJoin('m', MessageRead::TABLE_NAME, 'mr', 'm.id = mr.message_id AND mr.user_id != m.sender_id')
+            ->where('(m.sender_id = :userId AND m.receiver_id = :contactId) AND m.deleted_by_sender = false')
+            ->orWhere('(m.sender_id = :contactId AND m.receiver_id = :userId) AND m.deleted_by_receiver = false')
             ->setParameter('userId', $userId->getValue())
             ->setParameter('contactId', $contactId->getValue())
-            ->orderBy('m.created_at', 'ASC');
+            ->orderBy('m.sent_at', 'ASC');
 
         $messages = $qb->executeQuery()->fetchAllAssociative();
 
@@ -108,6 +136,46 @@ final readonly class MessageRepository implements MessageRepositoryInterface
         }
 
         return $data;
+    }
+
+    /** @throws Exception */
+    public function insertMarkAsRead(MessageRead $messageRead): void
+    {
+        $data = $this->getMessageReadMapper()->serialize($messageRead);
+
+        try {
+            $this->connection->insert(MessageRead::TABLE_NAME, $data);
+        } catch (UniqueConstraintViolationException $e) {
+            return;
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws Throwable
+     */
+    public function clearChatHistory(UserId $userId, UserId $contactId): void
+    {
+        $this->connection->transactional(function ($conn) use ($userId, $contactId) {
+            $usrId = $userId->getValue();
+            $cntId = $contactId->getValue();
+
+            $conn->createQueryBuilder()
+                ->update(Message::TABLE_NAME)
+                ->set('deleted_by_sender', 'true')
+                ->where('sender_id = :userId AND receiver_id = :contactId')
+                ->setParameter('userId', $usrId)
+                ->setParameter('contactId', $cntId)
+                ->executeStatement();
+
+            $conn->createQueryBuilder()
+                ->update(Message::TABLE_NAME)
+                ->set('deleted_by_receiver', 'true')
+                ->where('receiver_id = :userId AND sender_id = :contactId')
+                ->setParameter('userId', $usrId)
+                ->setParameter('contactId', $cntId)
+                ->executeStatement();
+        });
     }
 
 

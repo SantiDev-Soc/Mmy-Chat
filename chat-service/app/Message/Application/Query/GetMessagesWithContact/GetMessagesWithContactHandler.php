@@ -20,7 +20,7 @@ final readonly class GetMessagesWithContactHandler
     {
         $message = $this->messageRepository->findByUserId($query->userId);
         if (null === $message) {
-            throw new MessageNotFoundException();
+            return [];
         }
 
         $messages = $this->messageRepository->findMessagesWithContact(
@@ -30,7 +30,7 @@ final readonly class GetMessagesWithContactHandler
 
         $data = [];
         foreach ($messages as $message) {
-            $data[] = $this->transformerToDto::transform($message);
+            $data[] = $this->transformerToDto->transform($message);
         }
 
         return $data;
