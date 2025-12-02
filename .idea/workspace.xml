@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="page in maintenance, giving the lasts touches">
-      <change afterPath="$PROJECT_DIR$/mmy-chat/public/img/background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mmy-chat/public/img/ilerna-online.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mmy-chat/public/img/ilerna.png" afterDir="false" />
+    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="maintenance">
+      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1259" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2696" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2696" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat-data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/pg_xact/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1259" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619" afterDir="false" />
@@ -19,17 +19,12 @@
       <change beforePath="$PROJECT_DIR$/data/base/16384/2840_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_fsm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_vm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base/16384/2841" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2841" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/pg_subtrans/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_subtrans/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_xact/0000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/nginx.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/setup.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat/public/img/my-chat.png" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/public/img/my-chat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redis-data/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/redis-data/dump.rdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/actions/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/actions/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/state/state.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/state/state.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" beforeDir="false" afterPath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +50,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MMY-Chat/005-developing-message-readed" />
+        <entry key="$PROJECT_DIR$" value="MMY-Chat/004-Dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,6 +70,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="MMY-Chat/004-Maintenance" />
+                    <option name="lastUsedInstant" value="1764672199" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="MMY-Chat/004-Dev" />
                     <option name="lastUsedInstant" value="1764514287" />
                   </RecentBranch>
@@ -89,10 +88,6 @@
                   <RecentBranch>
                     <option name="branchName" value="MMY-Chat/003-functionalities-aside" />
                     <option name="lastUsedInstant" value="1763650053" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="MMY-Chat/002-developing-front-functionalities" />
-                    <option name="lastUsedInstant" value="1763196524" />
                   </RecentBranch>
                 </list>
               </option>
@@ -441,7 +436,7 @@
     &quot;PHPUnit.chat-service.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;MMY-Chat/004-Dev&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MMY-Chat/004-Maintenance&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/PROJECTS/Mmy-Daw-Project/mmy-chat-project/mmy-chat/public/img&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -588,7 +583,8 @@
       <workItem from="1764505249414" duration="10945000" />
       <workItem from="1764524135729" duration="1364000" />
       <workItem from="1764579738547" duration="5623000" />
-      <workItem from="1764666861442" duration="3800000" />
+      <workItem from="1764666861442" duration="17762000" />
+      <workItem from="1764693450642" duration="3479000" />
     </task>
     <task id="LOCAL-00001" summary="Preparing the branches">
       <option name="closed" value="true" />
@@ -702,7 +698,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764514227248</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="maintenance">
+      <option name="closed" value="true" />
+      <created>1764672099680</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1764672099680</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -733,7 +737,8 @@
     <MESSAGE value="second part of notifications with MessageRead.php implemented and deleted chat" />
     <MESSAGE value="settings behavior with the register &amp;&amp; login, implementing notifications while the user be offline" />
     <MESSAGE value="page in maintenance, giving the lasts touches" />
-    <option name="LAST_COMMIT_MESSAGE" value="page in maintenance, giving the lasts touches" />
+    <MESSAGE value="maintenance" />
+    <option name="LAST_COMMIT_MESSAGE" value="maintenance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

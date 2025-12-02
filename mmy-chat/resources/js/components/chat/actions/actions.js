@@ -2,7 +2,7 @@ export const logicaInterfaz = {
 
     async seleccionarChat(contacto) {
 
-        this.busqueda = contacto.name;
+        this.busqueda = ''; // limpiar el nombre del inpt al seleccionar el contacto
         this.contactoSeleccionado = { id: contacto.id, name: contacto.name };
         this.chatAbierto = false;
         this.mensajes = [];
@@ -26,10 +26,9 @@ export const logicaInterfaz = {
             this.conversaciones.unshift(chatMover);
         }
 
-        if (!this.userId) return;
+        if (!this.userId) {return;}
 
         this.mensajes = await this.obtenerMensajes(contacto.id);
-
         this.scrollAlFondo();
         this.procesarNoLeidos();
         this.conectarChatEspecifico(contacto.id);
@@ -47,7 +46,7 @@ export const logicaInterfaz = {
     procesarNoLeidos() {
         const idMio = String(this.userId).toLowerCase();
 
-        // Filtramos mensajes que NO son míos y NO tienen fecha de lectura
+        // Filtrar los mensajes que NO son míos y NO tienen fecha de lectura
         const idsPendientes = this.mensajes
             .filter(m => String(m.sender_id).toLowerCase() !== idMio && !m.read_at)
             .map(m => m.id);
@@ -70,20 +69,20 @@ export const logicaInterfaz = {
     },
 
     siguienteResultado() {
-        if (this.activeIndex < this.resultadosBusqueda.length - 1) {
-            this.activeIndex++;
+        if (this.resultadosBusqueda.length > 0 && this.indiceActivo < this.resultadosBusqueda.length - 1) {
+            this.indiceActivo++;
         }
     },
 
     anteriorResultado() {
-        if (this.activeIndex > 0) {
-            this.activeIndex--;
+        if (this.indiceActivo  > 0) {
+            this.indiceActivo --;
         }
     },
 
     elegirResultado() {
-        if (this.activeIndex >= 0 && this.resultadosBusqueda[this.activeIndex]) {
-            this.seleccionarChat(this.resultadosBusqueda[this.activeIndex]);
+        if (this.indiceActivo  >= 0 && this.resultadosBusqueda[this.indiceActivo ]) {
+            this.seleccionarChat(this.resultadosBusqueda[this.indiceActivo ]);
         }
     }
 };

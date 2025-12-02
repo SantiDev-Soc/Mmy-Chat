@@ -9,6 +9,7 @@ export const estadoInicial = (idUsuario) => ({
     userId: idUsuario,
     canalActivo: null,
     contadores: {},
+    indiceActivo: -1,
 
     api: (import.meta.env.VITE_CHAT_API_URL || 'https://localhost').replace(/\/$/, ''),
 });
