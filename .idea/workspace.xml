@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="settings behavior with the register &amp;&amp; login, implementing notifications while the user be offline">
-      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
+    <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="page in maintenance, giving the lasts touches">
+      <change afterPath="$PROJECT_DIR$/mmy-chat/public/img/background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmy-chat/public/img/ilerna-online.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmy-chat/public/img/ilerna.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2608" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2608" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_control" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat-data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_internal.init" afterDir="false" />
@@ -22,18 +22,13 @@
       <change beforePath="$PROJECT_DIR$/data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_control" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pg_subtrans/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_subtrans/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_xact/0000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/.env.chat-service" beforeDir="false" afterPath="$PROJECT_DIR$/environment/chat-service.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/.env.messages-db" beforeDir="false" afterPath="$PROJECT_DIR$/environment/messages-db.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/.env.my-chat" beforeDir="false" afterPath="$PROJECT_DIR$/environment/my-chat.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/.env.pgadmin" beforeDir="false" afterPath="$PROJECT_DIR$/environment/pgadmin.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/.env.reverb" beforeDir="false" afterPath="$PROJECT_DIR$/environment/reverb.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/.env.users-db" beforeDir="false" afterPath="$PROJECT_DIR$/environment/users-db.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/contactos.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/contactos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/mensajes.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/mensajes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" beforeDir="false" afterPath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/nginx.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/setup.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/public/img/my-chat.png" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/public/img/my-chat.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redis-data/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/redis-data/dump.rdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +55,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MMY-Chat/004-Dev" />
+        <entry key="$PROJECT_DIR$" value="MMY-Chat/005-developing-message-readed" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,12 +75,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="MMY-Chat/005-developing-message-readed" />
-                    <option name="lastUsedInstant" value="1763986599" />
+                    <option name="branchName" value="MMY-Chat/004-Dev" />
+                    <option name="lastUsedInstant" value="1764514287" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="MMY-Chat/004-Dev" />
-                    <option name="lastUsedInstant" value="1763801603" />
+                    <option name="branchName" value="MMY-Chat/005-developing-message-readed" />
+                    <option name="lastUsedInstant" value="1763986599" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="MMY-Chat/003-connetc-events" />
@@ -440,34 +435,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "PHPUnit.chat-service.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "MMY-Chat/005-developing-message-readed",
-    "last_opened_file_path": "D:/PROJECTS/Mmy-Daw-Project/mmy-chat-project",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "php.override.implement.member.chooser.php.doc": "NONE",
-    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php.debug",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2024.3.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;PHPUnit.chat-service.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MMY-Chat/004-Dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PROJECTS/Mmy-Daw-Project/mmy-chat-project/mmy-chat/public/img&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php.debug&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2024.3.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\mmy-chat\public\img" />
       <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project" />
       <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\environment" />
       <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\chat-service\app\Message\Domain" />
       <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\mmy-chat\routes" />
-      <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\mmy-chat\database\migrations" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\mmy-chat\resources\js\components\chat\state" />
@@ -477,7 +472,7 @@
       <recent name="D:\PROJECTS\Mmy-Daw-Project\mmy-chat-project\mmy-chat\resources\js\components\chat\websockets" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/mmy-chat-backup/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
@@ -508,6 +503,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
       </list>
@@ -588,7 +585,10 @@
       <workItem from="1764326564118" duration="716000" />
       <workItem from="1764350241495" duration="131000" />
       <workItem from="1764350945547" duration="2134000" />
-      <workItem from="1764505249414" duration="5482000" />
+      <workItem from="1764505249414" duration="10945000" />
+      <workItem from="1764524135729" duration="1364000" />
+      <workItem from="1764579738547" duration="5623000" />
+      <workItem from="1764666861442" duration="3800000" />
     </task>
     <task id="LOCAL-00001" summary="Preparing the branches">
       <option name="closed" value="true" />
@@ -694,7 +694,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764270281368</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="page in maintenance, giving the lasts touches">
+      <option name="closed" value="true" />
+      <created>1764514227247</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1764514227248</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +732,8 @@
     <MESSAGE value="first part of notifications with MessageRead.php implemented" />
     <MESSAGE value="second part of notifications with MessageRead.php implemented and deleted chat" />
     <MESSAGE value="settings behavior with the register &amp;&amp; login, implementing notifications while the user be offline" />
-    <option name="LAST_COMMIT_MESSAGE" value="settings behavior with the register &amp;&amp; login, implementing notifications while the user be offline" />
+    <MESSAGE value="page in maintenance, giving the lasts touches" />
+    <option name="LAST_COMMIT_MESSAGE" value="page in maintenance, giving the lasts touches" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
