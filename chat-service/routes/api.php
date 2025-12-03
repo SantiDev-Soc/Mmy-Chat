@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Http\Controllers\MessageController;
+use App\Message\Infrastructure\Entrypoint\Controller\MessageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', static function () {

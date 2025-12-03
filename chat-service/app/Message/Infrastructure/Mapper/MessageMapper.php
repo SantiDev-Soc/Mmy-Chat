@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Mapper;
+namespace App\Message\Infrastructure\Mapper;
 
 use App\Message\Domain\Message;
 use App\Shared\Domain\Repository\MapperInterface;

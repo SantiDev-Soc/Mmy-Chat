@@ -1,17 +1,16 @@
 export const logicaGlobal = {
 
     procesarNotificacionGlobal(evento) {
-        console.log("Notificación recibida:", evento);
 
         const emisor = String(evento.sender_id || evento.senderId || evento.payload?.sender_id).toLowerCase();
         const idMensaje = evento.id || evento.payload?.id;
 
         const chatAbiertoId = this.contactoSeleccionado.id
-            ? String(this.contactoSeleccionado.id).toLowerCase()
-            : null;
+            ? String(this.contactoSeleccionado.id).toLowerCase() : null;
 
         if (chatAbiertoId === emisor) {
             this.notificarLectura(idMensaje);
+
         } else {
             this.incrementarContador(emisor);
             this.subirChatAlInicio(emisor);
@@ -19,9 +18,8 @@ export const logicaGlobal = {
     },
 
     procesarLimpiezaRemota(evento) {
-        const idObjetivo = String(evento.contactId).toLowerCase();
-        console.log("limpieza de chat:", idObjetivo);
 
+        const idObjetivo = String(evento.contactId).toLowerCase();
         this.conversaciones = this.conversaciones.filter(c =>
             String(c.id || c.participant_id).toLowerCase() !== idObjetivo
         );
@@ -33,8 +31,7 @@ export const logicaGlobal = {
         }
 
         const chatAbiertoId = this.contactoSeleccionado.id
-            ? String(this.contactoSeleccionado.id).toLowerCase()
-            : null;
+            ? String(this.contactoSeleccionado.id).toLowerCase() : null;
 
         if (chatAbiertoId === idObjetivo) {
             this.mensajes = [];

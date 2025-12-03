@@ -3,18 +3,18 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Http\Persistence\DBAL\MessageRepository;
+use App\Message\Application\TransformerDTO\ConversationTransformer;
+use App\Message\Application\TransformerDTO\MessageReadTransformerDto;
+use App\Message\Application\TransformerDTO\TransformerDto;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
-use App\Message\TransformerDTO\ConversationTransformer;
-use App\Message\TransformerDTO\MessageReadTransformerDto;
-use App\Message\TransformerDTO\TransformerDto;
+use App\Message\Infrastructure\Persistence\DBAL\MessageRepository;
 use App\Shared\Application\InterfaceDto\ConversationTransformerDtoInterface;
 use App\Shared\Application\InterfaceDto\MessageReadTransformerDtoInterface;
 use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
 use App\Shared\Domain\Event\EventBusInterface;
 use App\Shared\Domain\Event\LaravelEventBus;
-use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
 

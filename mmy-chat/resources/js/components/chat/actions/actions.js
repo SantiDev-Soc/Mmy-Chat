@@ -46,7 +46,7 @@ export const logicaInterfaz = {
     procesarNoLeidos() {
         const idMio = String(this.userId).toLowerCase();
 
-        // Filtrar los mensajes que NO son míos y NO tienen fecha de lectura
+        // filtro los mensajes que no son míos
         const idsPendientes = this.mensajes
             .filter(m => String(m.sender_id).toLowerCase() !== idMio && !m.read_at)
             .map(m => m.id);

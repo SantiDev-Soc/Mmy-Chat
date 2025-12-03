@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Message\Application\Command\ChatCleared;
 
-use App\Http\Persistence\DBAL\MessageRepository;
 use App\Message\Domain\Events\ChatCleared;
+use App\Message\Infrastructure\Persistence\DBAL\MessageRepository;
 use App\Shared\Domain\Event\EventBusInterface;
 use Doctrine\DBAL\Exception;
 use Throwable;
