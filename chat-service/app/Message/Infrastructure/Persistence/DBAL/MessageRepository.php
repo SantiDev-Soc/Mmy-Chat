@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Persistence\DBAL;
+namespace App\Message\Infrastructure\Persistence\DBAL;
 
-use App\Http\Mapper\MessageMapper;
-use App\Http\Mapper\MessageReadMapper;
 use App\Message\Domain\Message;
 use App\Message\Domain\MessageRead;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
+use App\Message\Infrastructure\Mapper\MessageMapper;
+use App\Message\Infrastructure\Mapper\MessageReadMapper;
 use App\Shared\Domain\ValueObject\MessageId;
 use App\Shared\Domain\ValueObject\UserId;
 use Doctrine\DBAL\Connection;

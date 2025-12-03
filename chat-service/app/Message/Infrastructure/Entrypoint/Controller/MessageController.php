@@ -1,16 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Message\Infrastructure\Entrypoint\Controller;
 
-use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
-use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
+use App\Http\Controllers\Controller;
 use App\Message\Application\Command\ChatCleared\ChatClearedCommand;
 use App\Message\Application\Command\ChatCleared\ChatClearedHandler;
+use App\Message\Application\Command\CreateMessage\CreateMessageCommand;
+use App\Message\Application\Command\CreateMessage\CreateMessageHandler;
 use App\Message\Application\Command\MessageRead\MessageReadCommand;
 use App\Message\Application\Command\MessageRead\MessageReadHandler;
-use App\Message\Application\Query\GetConversations\GetConversationsQuery;
 use App\Message\Application\Query\GetConversations\GetConversationsHandler;
+use App\Message\Application\Query\GetConversations\GetConversationsQuery;
 use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactHandler;
 use App\Message\Application\Query\GetMessagesWithContact\GetMessagesWithContactQuery;
 use App\Message\Domain\Exception\MessageNotFoundException;

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Message\TransformerDTO;
+namespace App\Message\Application\TransformerDTO;
 
 use App\Message\Application\DTO\MessageReadResponseDto;
 use App\Message\Domain\MessageRead;

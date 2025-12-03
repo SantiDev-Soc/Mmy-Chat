@@ -1,9 +1,6 @@
+
 export const utilidades = {
 
-    /**
-     * Calcula cuántos mensajes sin leer tiene un chat específico.
-     * Se usa en el HTML para mostrar la bolita roja.
-     */
     contarNoLeidos(chat) {
         if (!chat) return 0;
 

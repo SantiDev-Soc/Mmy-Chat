@@ -5,16 +5,16 @@ import { manejadorEventos  } from './websockets/index.js';
 import { logicaInterfaz  } from './actions/actions.js';
 import { utilidades  } from './helpers/helpers.js';
 
-export default function (loggedUserId) {
+export default function (UserIdloged) {
     return {
-        ...estadoInicial(loggedUserId),
+        ...estadoInicial(UserIdloged),
         ...peticionesApi,
         ...manejadorEventos,
         ...logicaInterfaz,
         ...utilidades,
 
         init() {
-            console.log('Chat Componente Cargado');
+            console.log('Chat Componente Onload');
             if (this.userId) {
                 this.cargarMisConversaciones(this.userId);
                 this.iniciarEscuchaGlobal();

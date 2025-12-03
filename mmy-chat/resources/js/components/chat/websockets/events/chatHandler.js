@@ -4,7 +4,7 @@ export const logicaDeChat = {
         // si lo envié yo lo ignoro
         if (String(mensaje.sender_id).toLowerCase() === String(this.userId).toLowerCase()) return;
 
-        // evita duplicados
+        // evita los duplicados
         if (this.mensajes.some(m => String(m.id) === String(mensaje.id))) return;
 
         // añadir y scroll
@@ -12,7 +12,7 @@ export const logicaDeChat = {
 
         if (this.irAlUltimoMensaje) this.irAlUltimoMensaje();
 
-        // marcar leído
+        // marcar como leído
         if (this.notificarLectura) this.notificarLectura(mensaje.id);
     },
 
