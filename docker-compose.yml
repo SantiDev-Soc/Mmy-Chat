@@ -1,17 +1,16 @@
 
+# RED VIRTUAL MYNETWORK
 networks:
   mynetwork:
     driver: bridge
 
 services:
 
+# SERVICIO DE IDENTIDAD Y FRONTEND
   my-chat:
     build:
       context: ./mmy-chat
       dockerfile: Dockerfile
-    ports:
-      - '8020:8020'
-      - '5173:5173'
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8020" ]
       interval: 30s
@@ -29,13 +28,12 @@ services:
     networks:
       - mynetwork
 
+# CONTENEDOR WEBSOCKETS
   reverb:
     build:
       context: ./mmy-chat
       dockerfile: Dockerfile.reverb
     command: [ "php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080" ]
-    ports:
-      - "8080:8080"
     depends_on:
       users-db:
         condition: service_healthy
@@ -47,6 +45,7 @@ services:
     networks:
       - mynetwork
 
+# INSTANCIA DE POSTGRESQL (DB USERS)
   users-db:
     image: postgres:latest
     restart: always
@@ -55,8 +54,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    ports:
-      - '5432:5432'
     volumes:
       - './data:/var/lib/postgresql/data'
     env_file:
@@ -64,12 +61,11 @@ services:
     networks:
       - mynetwork
 
+# SERVICIO DE MENSAJERÍA LARAVEL 11 (BACKEND API)
   chat-service:
     build:
       context: ./chat-service
       dockerfile: Dockerfile
-    ports:
-      - '8030:8030'
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8030" ]
       interval: 30s
@@ -90,11 +86,10 @@ services:
     networks:
       - mynetwork
 
+# INSTANCIA POSTGRESQL (DB MESSAGES)
   messages-db:
     image: postgres:latest
     restart: always
-    ports:
-      - '5433:5432'
     volumes:
       - './chat-data:/var/lib/postgresql/data'
     env_file:
@@ -107,6 +102,7 @@ services:
     networks:
       - mynetwork
 
+# GESTOR DE DB (PGADMIN)
   pgadmin:
     image: dpage/pgadmin4
     ports:
@@ -121,15 +117,15 @@ services:
     networks:
       - mynetwork
 
+# BUS DE EVENTOS (REDIS)
   redis:
     image: redis:alpine
-    ports:
-      - "7000:6379" # Host 7000 -> Contenedor 6379 (Correcto)
     volumes:
       - ./redis-data:/data
     networks:
       - mynetwork
 
+# ÚNICA ENTRADA PÚBLICA (GATEWAY)
   nginx:
     image: nginx:latest
     ports:
@@ -144,3 +140,4 @@ services:
       - my-chat
     networks:
       - mynetwork
+
