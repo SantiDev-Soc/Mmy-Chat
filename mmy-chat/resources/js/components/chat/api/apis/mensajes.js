@@ -42,18 +42,22 @@ export const apiMensajes = {
     },
 
     async notificarLectura(idMensaje) {
-        if(!idMensaje) return;
+        if(!idMensaje) {return;}
+
         try {
             await fetch(`${this.api}/api/messages/read`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ message_id: idMensaje, reader_id: this.userId })
+                body: JSON.stringify({ message_id: idMensaje, reader_id: this.userId
+                })
             });
-        } catch (e) { console.warn("Error de lectura:", e); }
+        } catch (e) {
+            console.warn("Error de lectura:", e);
+        }
     },
 
     async limpiarChat(chat) {
-        if (!confirm('Borrar este chat? Desaparecerá de tu lista.')) return;
+        if (!confirm('Si borras el chat esaparecerá de tu lista!')) return;
         const idContacto = String(chat.participant_id || chat.id);
 
         try {
@@ -71,6 +75,8 @@ export const apiMensajes = {
                     this.mensajes = [];
                 }
             }
-        } catch (e) { console.error("Error limpiando chat:", e); }
+        } catch (e) {
+            console.error("Error limpiando chat:", e);
+        }
     }
 };

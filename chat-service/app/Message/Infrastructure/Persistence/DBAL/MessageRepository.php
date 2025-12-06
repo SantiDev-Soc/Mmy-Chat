@@ -13,6 +13,7 @@ use App\Shared\Domain\ValueObject\UserId;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 final readonly class MessageRepository implements MessageRepositoryInterface
@@ -85,7 +86,7 @@ final readonly class MessageRepository implements MessageRepositoryInterface
     {
         $qb = $this->connection->createQueryBuilder();
 
-        $unreadSubQuery = sprintf(
+        $noReadSubQuery = sprintf(
             "(SELECT COUNT(*) FROM %s m2
               LEFT JOIN %s mr ON m2.id = mr.message_id AND mr.user_id = :userId
               WHERE m2.receiver_id = :userId
@@ -99,7 +100,7 @@ final readonly class MessageRepository implements MessageRepositoryInterface
         $qb->select('DISTINCT CASE
              WHEN m.sender_id = :userId THEN m.receiver_id ELSE m.sender_id END AS contact_id')
             ->from(Message::TABLE_NAME, 'm')
-            ->addSelect("$unreadSubQuery AS unread_count")
+            ->addSelect("$noReadSubQuery AS unread_count")
             ->where('m.sender_id = :userId OR m.receiver_id = :userId')
             ->setParameter('userId', $userId->getValue());
 
@@ -119,20 +120,29 @@ final readonly class MessageRepository implements MessageRepositoryInterface
                 m.sent_at,
                 m.created_at,
                 mr.read_at'
-        )
-            ->from(Message::TABLE_NAME, 'm')
+           )->from(Message::TABLE_NAME, 'm')
             ->leftJoin('m', MessageRead::TABLE_NAME, 'mr', 'm.id = mr.message_id AND mr.user_id != m.sender_id')
-            ->where('(m.sender_id = :userId AND m.receiver_id = :contactId) AND m.deleted_by_sender = false')
-            ->orWhere('(m.sender_id = :contactId AND m.receiver_id = :userId) AND m.deleted_by_receiver = false')
-            ->setParameter('userId', $userId->getValue())
-            ->setParameter('contactId', $contactId->getValue())
+            ->where('
+                (
+                    m.sender_id = :userId
+                    AND m.receiver_id = :contactId
+                    AND m.deleted_by_sender IS NOT TRUE
+                )
+                OR
+                (
+                    m.sender_id = :contactId
+                    AND m.receiver_id = :userId
+                    AND m.deleted_by_receiver IS NOT TRUE
+                )
+          ')->setParameter('userId', strtolower($userId->getValue()))
+            ->setParameter('contactId', strtolower($contactId->getValue()))
             ->orderBy('m.sent_at', 'ASC');
 
-        $messages = $qb->executeQuery()->fetchAllAssociative();
+        $messagesRows = $qb->executeQuery()->fetchAllAssociative();
 
         $data = [];
-        foreach ($messages as $message) {
-            $data[] = $this->getMapper()->hydrate($message);
+        foreach ($messagesRows as $row) {
+            $data[] = $this->getMapper()->hydrate($row);
         }
 
         return $data;
@@ -177,6 +187,4 @@ final readonly class MessageRepository implements MessageRepositoryInterface
                 ->executeStatement();
         });
     }
-
-
 }

@@ -5,7 +5,123 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b70f22c-2047-47bf-8f92-b95fa11e0bde" name="Changes" comment="closed open ports in .yml to public access, only can access from nginx gateway">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1247" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1247" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1247_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1247_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1247_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1247_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1249" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1249" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1249_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1249_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1249_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1249_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1259" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1259_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1259_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/1259_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/1259_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2224" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2224" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2579" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2579" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2604" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2604" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2606" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2606" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2606_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2606_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2606_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2606_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2608" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2608" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2608_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2608_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2608_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2608_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2610" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2610" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2610_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2610_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2610_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2610_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2619_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2619_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2656" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2656" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2657" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2657" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2658" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2658" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2659" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2659" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2662" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2662" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2663" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2663" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2664" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2664" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2665" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2665" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2666" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2666" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2667" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2667" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2673" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2673" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2674" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2674" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2678" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2678" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2679" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2679" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2696" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2696" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2703" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2703" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2704" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2704" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2840_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/2841" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/2841" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/3455" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/3455" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/base/16384/5002" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/base/16384/5002" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/global/pg_control" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/chat-data/pg_xact/0000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Domain/Events/MessageSent.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Domain/Events/MessageSent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Domain/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Domain/Message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat-service/app/Message/Infrastructure/Persistence/DBAL/MessageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/chat-service/app/Message/Infrastructure/Persistence/DBAL/MessageRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1247" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1247" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1247_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1247_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1247_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1247_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1249" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1249" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1249_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1249_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1249_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1249_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1259" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1259_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1259_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/1259_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/1259_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2224" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2224" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2579" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2579" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2604" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2604" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2606" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2606" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2606_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2606_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2606_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2606_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2608" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2608" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2608_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2608_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2608_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2608_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2610" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2610" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2610_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2610_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2610_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2610_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2619" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2619_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2619_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2619_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2620" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2620" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2656" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2656" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2657" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2657" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2658" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2658" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2659" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2659" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2662" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2662" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2663" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2663" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2664" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2664" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2665" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2665" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2666" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2666" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2667" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2667" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2673" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2673" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2674" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2674" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2678" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2678" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2679" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2679" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2696" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2696" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2699" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2699" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2701" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2701" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2702" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2702" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2703" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2703" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2704" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2704" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2840" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2840_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_fsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2840_vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/2841" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/2841" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/3455" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/3455" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/5002" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/5002" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/base/16384/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_control" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/data/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pg_subtrans/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_subtrans/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/data/pg_xact/0000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/contactos.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/contactos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/mensajes.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/api/apis/mensajes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/helpers/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/websockets/events/chatHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/websockets/events/chatHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/websockets/events/handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/websockets/events/handlers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/websockets/events/starters.js" beforeDir="false" afterPath="$PROJECT_DIR$/mmy-chat/resources/js/components/chat/websockets/events/starters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" beforeDir="false" afterPath="$PROJECT_DIR$/pgadmin-data/pgadmin4.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redis-data/dump.rdb" beforeDir="false" afterPath="$PROJECT_DIR$/redis-data/dump.rdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +147,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MMY-Chat/004-Dev" />
+        <entry key="$PROJECT_DIR$" value="MMY-Chat/004-Maintenance" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -418,6 +534,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "MMY-Chat/004-Maintenance",
+    "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/PROJECTS/Mmy-Daw-Project/mmy-chat-project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -572,7 +689,9 @@
       <workItem from="1764767512565" duration="14591000" />
       <workItem from="1764849286525" duration="12000" />
       <workItem from="1764864802646" duration="4436000" />
-      <workItem from="1764922328573" duration="3808000" />
+      <workItem from="1764922328573" duration="25891000" />
+      <workItem from="1765011965951" duration="3412000" />
+      <workItem from="1765019246584" duration="3369000" />
     </task>
     <task id="LOCAL-00001" summary="Preparing the branches">
       <option name="closed" value="true" />
@@ -718,7 +837,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764934710344</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="closed open ports in .yml to public access, only can access from nginx gateway">
+      <option name="closed" value="true" />
+      <created>1764934821294</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1764934821294</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
