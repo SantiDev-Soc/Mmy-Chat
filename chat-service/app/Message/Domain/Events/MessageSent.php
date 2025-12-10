@@ -6,13 +6,14 @@ namespace App\Message\Domain\Events;
 use App\Message\Domain\Message;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
-class MessageSent implements ShouldBroadcast, ShouldQueue
+class MessageSent implements ShouldBroadcastNow, ShouldQueue
 {
-    use Dispatchable, InteractsWithSockets;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public string $senderId;
     public string $receiverId;
@@ -29,17 +30,17 @@ class MessageSent implements ShouldBroadcast, ShouldQueue
     public function broadcastOn(): array
     {
         $participants = [
-            $this->senderId,
-            $this->receiverId,
+           strtolower($this->senderId),
+            strtolower($this->receiverId),
         ];
 
         sort($participants);
 
-        $channelName = 'conversation.' . implode('.', $participants);
+        $channelName = 'conversation.' .implode('.', $participants);
 
         return [
             new PrivateChannel($channelName),
-            new PrivateChannel('user.' . $this->receiverId),
+            new PrivateChannel('user.' . strtolower($this->receiverId)),
         ];
     }
 

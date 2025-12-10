@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Message\Application\Command\ChatCleared;
 
-use App\Message\Domain\Events\ChatCleared;
+use App\Message\Domain\Events\ChatClearedEvent;
 use App\Message\Infrastructure\Persistence\DBAL\MessageRepository;
 use App\Shared\Domain\Event\EventBusInterface;
 use Doctrine\DBAL\Exception;
@@ -26,7 +26,7 @@ final readonly class ChatClearedHandler
     {
         $this->messageRepository->clearChatHistory($command->userId, $command->contactId);
 
-        $event = new ChatCleared(
+        $event = new ChatClearedEvent(
             $command->userId->getValue(),
             $command->contactId->getValue()
         );

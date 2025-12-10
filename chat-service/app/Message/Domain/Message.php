@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Message\Domain;
 
-use App\Shared\Domain\ValueObject\MessageId;
-use App\Shared\Domain\ValueObject\UserId;
+use App\Message\Domain\ValueObject\MessageId;
+use App\Message\Domain\ValueObject\UserId;
 use DateTimeImmutable;
 use Exception;
 
@@ -19,7 +19,8 @@ class Message
     private ?DateTimeImmutable $readAt;
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
-
+    private bool $deletedBySender;
+    private bool $deletedByReceiver;
 
     public function __construct(
         MessageId $id,
@@ -29,7 +30,9 @@ class Message
         DateTimeImmutable $sentAt,
         ?DateTimeImmutable $readAt,
         DateTimeImmutable $createdAt,
-        DateTimeImmutable $updatedAt
+        DateTimeImmutable $updatedAt,
+        bool $deletedBySender = false,
+        bool $deletedByReceiver = false
     )
     {
         $this->id = $id;
@@ -40,6 +43,8 @@ class Message
         $this->readAt = $readAt;
         $this->createdAt = $createdAt ?? new DateTimeImmutable();
         $this->updatedAt = $updatedAt ?? new DateTimeImmutable();
+        $this->deletedBySender = $deletedBySender;
+        $this->deletedByReceiver = $deletedByReceiver;
     }
 
     public function getId(): MessageId
@@ -92,6 +97,8 @@ class Message
             'sent_at' => $this->sentAt->format('Y-m-d H:i:s'),
             'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
             'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
+            'deleted_by_sender' => $this->deletedBySender ? 1 : 0,
+            'deleted_by_receiver' => $this->deletedByReceiver ? 1 : 0,
         ];
     }
 
@@ -107,8 +114,21 @@ class Message
         $readAt = $readAtRaw ? self::dateTime($readAtRaw) : null;
         $createdAt = isset($data['created_at']) ? self::dateTime($data['created_at']) : $sentAt;
         $updatedAt = isset($data['updated_at']) ? self::dateTime($data['updated_at']) : $sentAt;
+        $delSender = isset($data['deleted_by_sender']) && (bool)$data['deleted_by_sender'];
+        $delReceiver = isset($data['deleted_by_receiver']) && (bool)$data['deleted_by_receiver'];
 
-        return new self($id, $senderId, $receiverId, $content, $sentAt, $readAt, $createdAt, $updatedAt);
+        return new self(
+            $id,
+            $senderId,
+            $receiverId,
+            $content,
+            $sentAt,
+            $readAt,
+            $createdAt,
+            $updatedAt,
+            $delSender,
+            $delReceiver
+        );
     }
 
     private static function dateTime(?string $dateStr): DateTimeImmutable

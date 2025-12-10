@@ -7,10 +7,10 @@ use App\Message\Application\DTO\MessageResponseDto;
 use App\Message\Domain\Events\MessageSent;
 use App\Message\Domain\Message;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
+use App\Message\Domain\ValueObject\MessageId;
 use App\Shared\Application\InterfaceDto\TransformerToDtoInterface;
 use App\Shared\Domain\Event\EventBusInterface;
 use App\Shared\Domain\Exception\InvalidUserException;
-use App\Shared\Domain\ValueObject\MessageId;
 use DateTimeImmutable;
 use InvalidArgumentException;
 

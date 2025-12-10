@@ -28,7 +28,7 @@ export const utilidades = {
     },
 
     normalizarId(valor) {
-        if (!valor) return null;
+        if (!valor) {return null;}
         return String(valor).toLowerCase();
     },
 

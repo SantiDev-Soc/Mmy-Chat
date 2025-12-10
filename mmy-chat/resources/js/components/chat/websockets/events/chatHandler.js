@@ -1,19 +1,20 @@
+
 export const logicaDeChat = {
 
     procesarMensajeEnChat(mensaje) {
         // si lo envié yo lo ignoro
-        if (String(mensaje.sender_id).toLowerCase() === String(this.userId).toLowerCase()) return;
+        if (String(mensaje.sender_id).toLowerCase() === String(this.userId).toLowerCase()) {return;}
 
-        // evita los duplicados
-        if (this.mensajes.some(m => String(m.id) === String(mensaje.id))) return;
+        // evita los messajes duplicados
+        if (this.mensajes.some(m => String(m.id) === String(mensaje.id))) {return;}
 
         // añadir y scroll
         this.mensajes.push(mensaje);
 
-        if (this.irAlUltimoMensaje) this.irAlUltimoMensaje();
+        if (this.irAlUltimoMensaje) {this.irAlUltimoMensaje();}
 
         // marcar como leído
-        if (this.notificarLectura) this.notificarLectura(mensaje.id);
+        if (this.notificarLectura) {this.notificarLectura(mensaje.id);}
     },
 
     procesarConfirmacionLectura(evento) {

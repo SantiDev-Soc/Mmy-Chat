@@ -5,9 +5,8 @@ namespace App\Message\Domain\Repository;
 
 use App\Message\Domain\Message;
 use App\Message\Domain\MessageRead;
-use App\Shared\Domain\ValueObject\MessageId;
-use App\Shared\Domain\ValueObject\UserId;
-use DateTimeImmutable;
+use App\Message\Domain\ValueObject\MessageId;
+use App\Message\Domain\ValueObject\UserId;
 
 interface MessageRepositoryInterface
 {

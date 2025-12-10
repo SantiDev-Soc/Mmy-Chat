@@ -43,6 +43,7 @@ export const apiContactos = {
                 }
             });
 
+            // lista de los DTOs del backend con los ids
             const idsParaPedir = listaDTOs.map(dto => dto.contact_id);
             const idsParam = idsParaPedir.join(',');
 
