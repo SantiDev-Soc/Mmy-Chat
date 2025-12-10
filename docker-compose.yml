@@ -11,7 +11,7 @@ services:
     build:
       context: ./mmy-chat
       dockerfile: Dockerfile
-  # no es accesible por http://localhost:8020
+  # no es accesible por http://localhost:8020 ni https://localhost:8020
   # ports:
     # - '8020:8020'
     # - '5173:5173'
@@ -103,7 +103,7 @@ services:
   messages-db:
     image: postgres:latest
     restart: always
-  # Nadie puede robar mensajes desde fuera
+  # Nadie puede ver los mensajes desde fuera
   # ports:
     # - '5433:5432'
     volumes:
@@ -160,4 +160,5 @@ services:
       - my-chat
     networks:
       - mynetwork
+
 

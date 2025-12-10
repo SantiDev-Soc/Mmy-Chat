@@ -6,14 +6,13 @@ namespace App\Message\Infrastructure\Persistence\DBAL;
 use App\Message\Domain\Message;
 use App\Message\Domain\MessageRead;
 use App\Message\Domain\Repository\MessageRepositoryInterface;
+use App\Message\Domain\ValueObject\MessageId;
+use App\Message\Domain\ValueObject\UserId;
 use App\Message\Infrastructure\Mapper\MessageMapper;
 use App\Message\Infrastructure\Mapper\MessageReadMapper;
-use App\Shared\Domain\ValueObject\MessageId;
-use App\Shared\Domain\ValueObject\UserId;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Illuminate\Support\Facades\Log;
 use Throwable;
 
 final readonly class MessageRepository implements MessageRepositoryInterface

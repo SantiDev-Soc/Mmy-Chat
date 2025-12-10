@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Message\Domain;
 
-use App\Shared\Domain\ValueObject\MessageId;
-use App\Shared\Domain\ValueObject\UserId;
+use App\Message\Domain\ValueObject\MessageId;
+use App\Message\Domain\ValueObject\UserId;
 use DateTimeImmutable;
 
 class MessageRead
@@ -17,7 +17,7 @@ class MessageRead
     public function __construct(
         MessageId $messageId,
         UserId $readerId,
-        DateTimeImmutable $readAt = null
+        DateTimeImmutable $readAt
     )
     {
         $this->messageId = $messageId;
